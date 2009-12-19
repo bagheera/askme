@@ -2,18 +2,15 @@ namespace Askme.Domain
 {
     public class Question
     {
-        private AskMeDate askedOn;
+        private readonly AskMeDate askedOn;
 
-        public Question(string text)
+        public Question(string text, AskMeDate time)
         {
             Text = text;
-            askedOn = new AskMeDate();
+            askedOn = time;
         }
 
-        public string Text
-        {
-            get; private set;
-        }
+        public string Text { get; private set; }
 
         public AskMeDate AskedOn
         {
