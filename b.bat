@@ -1,1 +1,1 @@
-.\Library\nant\bin\nant.exe 
+.\Library\nant\bin\nant.exe -buildfile:Default.build %*
