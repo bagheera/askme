@@ -15,12 +15,6 @@ namespace Askme.Domain
         }
         
         [Test]
-        public void NowShouldReturnNullByDefault()
-        {
-            Assert.IsNull(AskMeDate.CurrentTime);
-        }
-
-        [Test]
         public void NowShouldChangeAsAssigned()
         {
             DateTime jan2010 = new DateTime(2010,1,1);
