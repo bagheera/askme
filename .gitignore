@@ -6,3 +6,5 @@ obj/
 *.cache
 *.log
 debug
+coverage.xml
+TestResult.xml
