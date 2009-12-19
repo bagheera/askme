@@ -4,32 +4,28 @@ namespace Askme.Domain
 {
     public class AskMeDate
     {
-        private readonly DateTime value;
-        private static DateTime now;
+        private readonly DateTime askmeDate;
+        private static AskMeDate currentTime;
 
         public AskMeDate()
         {
-            this.value = now;
+            this.askmeDate = DateTime.Now;
         }
 
         public AskMeDate(DateTime dateTime)
         {
-            this.value = dateTime;
+            this.askmeDate = dateTime;
         }
 
         public DateTime Value
         {
-            get { return value; }
+            get { return askmeDate; }
         }
 
-        public static DateTime Now
+        public static AskMeDate CurrentTime
         {
-            get { 
-                if (DateTime.MinValue == now)
-                    return DateTime.Now; 
-                return now;
-            }
-            set { now = value; }
+            get { return currentTime;}
+            set { currentTime = new AskMeDate(value.Value); }
         }
     }
 }

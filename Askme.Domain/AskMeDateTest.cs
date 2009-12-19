@@ -15,17 +15,17 @@ namespace Askme.Domain
         }
         
         [Test]
-        public void NowShouldReturnCurrentTimeByDefault()
+        public void NowShouldReturnStartOfTimeByDefault()
         {
-            Assert.AreEqual(DateTime.Now,AskMeDate.Now);//somewhat iffy but ok
+            Assert.AreEqual(DateTime.MinValue, AskMeDate.CurrentTime);//somewhat iffy but ok
         }
 
         [Test]
         public void NowShouldChangeAsAssigned()
         {
             DateTime jan2010 = new DateTime(2010,1,1);
-            AskMeDate.Now = jan2010;
-            Assert.AreEqual(jan2010, AskMeDate.Now);
+            AskMeDate.CurrentTime = new AskMeDate(jan2010);
+            Assert.AreEqual(jan2010, AskMeDate.CurrentTime.Value);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Askme.Domain
         public void ASkedOnDateShouldDefaultToCurrentDateTime()
         {
             string questionText = "What is the use of 'var' key word?";
-            AskMeDate.Now = DateTime.Now;
+            AskMeDate.CurrentTime = new AskMeDate();
             Question question = new Question(questionText);
-            Assert.AreEqual(AskMeDate.Now, question.AskedOn.Value);
+            Assert.AreEqual(AskMeDate.CurrentTime.Value, question.AskedOn.Value);
         }
     }
 }
