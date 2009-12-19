@@ -2,9 +2,24 @@
  <project name="Askme" default="build" basedir=".">
         <description>Askme</description>
         <target name="build" description="compiles the source code">
+			<echo message="compile" />
 			<msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
 				<property name="Configuration" value="Debug"/>
 				<property name="WarningLevel" value="0"/>
 			</msbuild>
         </target>
-    </project>
+		<target name="clean">
+			<echo message="clean" />
+			<delete>
+				<fileset basedir=".">
+					<include name="**/bin/debug/*"/>
+					<include name="**/obj/*"/>
+					<include name="**/obj/debug/*"/>
+				</fileset>
+			</delete>
+		</target>
+
+		 <target name="test" description="runs unit tests">
+			<echo message="test" />
+        </target>
+</project>
