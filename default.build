@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+ <project name="Askme" default="build" basedir=".">
+        <description>Askme</description>
+        <target name="build" description="compiles the source code">
+			<msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
+				<property name="Configuration" value="Debug"/>
+				<property name="WarningLevel" value="0"/>
+			</msbuild>
+        </target>
+    </project>
