@@ -7,3 +7,4 @@ obj/
 *.log
 debug
 coverage.xml
+TestResult.xml
