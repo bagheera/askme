@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace Askme.Domain
 {
-    [TestFixture]
+    [TestFixture,Ignore]
     public class UserTest:NHibernateInMemoryTestFixtureBase
     {
         private ISession session;
