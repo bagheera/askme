@@ -1,3 +1,6 @@
 *.suo
 *.user
 _ReSharper*
+bin
+debug
+obj
