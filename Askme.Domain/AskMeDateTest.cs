@@ -15,9 +15,9 @@ namespace Askme.Domain
         }
         
         [Test]
-        public void NowShouldReturnStartOfTimeByDefault()
+        public void NowShouldReturnNullByDefault()
         {
-            Assert.AreEqual(DateTime.MinValue, AskMeDate.CurrentTime);//somewhat iffy but ok
+            Assert.IsNull(AskMeDate.CurrentTime);
         }
 
         [Test]
