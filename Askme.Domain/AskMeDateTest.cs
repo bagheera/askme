@@ -13,5 +13,19 @@ namespace Askme.Domain
             AskMeDate date = new AskMeDate(askedOn);
             Assert.AreEqual(askedOn, date.Value);
         }
+        
+        [Test]
+        public void NowShouldReturnCurrentTimeByDefault()
+        {
+            Assert.AreEqual(DateTime.Now,AskMeDate.Now);//somewhat iffy but ok
+        }
+
+        [Test]
+        public void NowShouldChangeAsAssigned()
+        {
+            DateTime jan2010 = new DateTime(2010,1,1);
+            AskMeDate.Now = jan2010;
+            Assert.AreEqual(jan2010, AskMeDate.Now);
+        }
     }
 }
