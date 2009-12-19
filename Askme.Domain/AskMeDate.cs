@@ -9,12 +9,12 @@ namespace Askme.Domain
 
         public AskMeDate()
         {
-            this.askmeDate = DateTime.Now;
+            askmeDate = DateTime.Now;
         }
 
         public AskMeDate(DateTime dateTime)
         {
-            this.askmeDate = dateTime;
+            askmeDate = dateTime;
         }
 
         public DateTime Value
@@ -24,7 +24,7 @@ namespace Askme.Domain
 
         public static AskMeDate CurrentTime
         {
-            get { return currentTime;}
+            get { return currentTime; }
             set { currentTime = new AskMeDate(value.Value); }
         }
     }

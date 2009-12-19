@@ -5,7 +5,5 @@
       <generator class="native" />
     </id>
     <property name="Username" column="Username" type="String" length="120"/>
-    
-    
   </class>
 </hibernate-mapping>
