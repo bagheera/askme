@@ -1,13 +1,7 @@
 <?xml version="1.0"?>
- <project name="Askme" default="build" basedir=".">
+ <project name="Askme" default="test" basedir=".">
         <description>Askme</description>
-        <target name="build" description="compiles the source code">
-			<echo message="compile" />
-			<msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
-				<property name="Configuration" value="Debug"/>
-				<property name="WarningLevel" value="0"/>
-			</msbuild>
-        </target>
+
 		<target name="clean">
 			<echo message="clean" />
 			<delete>
@@ -19,7 +13,24 @@
 			</delete>
 		</target>
 
-		 <target name="test" description="runs unit tests">
+        <target name="build" description="compiles the source code" depends="clean">
+			<echo message="compile" />
+			<msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
+				<property name="Configuration" value="Debug"/>
+				<property name="WarningLevel" value="0"/>
+			</msbuild>
+        </target>
+		
+		 <target name="test" description="runs unit tests" depends="build">
 			<echo message="test" />
+			<ncover program="Library\NCover\NCover.Console.exe"
+               commandLineExe="Library\nunit\nunit-console.exe"
+               commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
+               workingDirectory="."
+               logLevel="Quiet"
+               excludeAttributes=""
+			   coverageFile="Coverage.xml"
+			>
+			</ncover>
         </target>
 </project>
