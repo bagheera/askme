@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Askme.Domain
 {
     public class Question
@@ -6,6 +8,7 @@ namespace Askme.Domain
 
         private int Id;
         private string text;
+        private QuestionTags questionTags;
 
         public Question()
         {
@@ -15,6 +18,14 @@ namespace Askme.Domain
         {
             this.text = text;
             askedOn = new AskMeDate();
+        }
+
+        public Question(string text, List<string>tags)
+        {
+            this.text = text;
+            this.questionTags = new QuestionTags(tags);
+            askedOn = new AskMeDate();
+            
         }
 
         public virtual int QuestionId
@@ -27,10 +38,15 @@ namespace Askme.Domain
             get { return text; }
         }
 
+        public virtual QuestionTags Tags
+        {
+            get { return questionTags;  }
+        }
+
         public virtual AskMeDate QuestionAskedOn
         {
             get { return askedOn; }
         }
-       
-    }
+        
+}
 }
