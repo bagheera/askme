@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using NHibernate;
 using NUnit.Framework;
@@ -7,7 +6,7 @@ using NUnit.Framework;
 namespace Askme.Domain
 {
     [TestFixture]
-    public class QuestionTest:NHibernateInMemoryTestFixtureBase
+    public class QuestionTest:NHibernateInMemoryBase
     {
         private ISession session;
         [TestFixtureSetUp]
@@ -26,34 +25,18 @@ namespace Askme.Domain
         public void ShouldBeAbleToGetTheQuestionText()
         {
             string questionText = "What is the use of 'var' key word?";
-<<<<<<< HEAD
-<<<<<<< HEAD
-            Question question = new Question(questionText, AskMeDate.CurrentTime);
-            Assert.AreEqual(questionText,question.Text);
-=======
+           
             Question question = new Question(questionText);
             Assert.AreEqual(questionText,question.QuestionText);
->>>>>>> question
-=======
-            Question question = new Question(questionText);
-            Assert.AreEqual(questionText,question.QuestionText);
->>>>>>> 13325c4... Added Hibernat Code -Shanu/Hari
         }
         [Test]
         public void AskedOnDateShouldDefaultToCurrentDateTime()
         {
             string questionText = "What is the use of 'var' key word?";
             AskMeDate.CurrentTime = new AskMeDate();
-<<<<<<< HEAD
-            Question question = new Question(questionText, AskMeDate.CurrentTime);
-            Assert.AreEqual(AskMeDate.CurrentTime, question.AskedOn);
-=======
+
             Question question = new Question(questionText);
             Assert.AreEqual(AskMeDate.CurrentTime.Value, question.QuestionAskedOn.Value);
-<<<<<<< HEAD
->>>>>>> question
-=======
->>>>>>> 13325c4... Added Hibernat Code -Shanu/Hari
         }
         [Test]
         public void ShouldCreateOneQuestionInDb()
