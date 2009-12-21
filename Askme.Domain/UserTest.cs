@@ -7,22 +7,8 @@ using NUnit.Framework;
 namespace Askme.Domain
 {
     [TestFixture,Ignore]
-    public class UserTest:NHibernateInMemoryBase
+    public class UserTest
     {
-        private ISession session;
-
-        [TestFixtureSetUp]
-        public void SuiteSetup()
-        {
-            InitalizeSessionFactory(new FileInfo("User.hbm.xml"));
-        }
-
-        [SetUp]
-        public void TestSetup()
-        {
-            session = CreateSession();
-        }
-
         [Test]
         public void TestUserHasUserId()
         {
@@ -42,11 +28,5 @@ namespace Askme.Domain
             Assert.IsTrue(user.Register(mock.Object));
         }
         
-
-        [TearDown]
-        public void TestTearDown()
-        {
-            session.Dispose();
-        }
     }
 }
