@@ -4,20 +4,33 @@ namespace Askme.Domain
     {
         private AskMeDate askedOn;
 
+        private int Id;
+        private string text;
+
+        public Question()
+        {
+        }
+
         public Question(string text)
         {
-            Text = text;
+            this.text = text;
             askedOn = new AskMeDate();
         }
 
-        public string Text
+        public virtual int QuestionId
         {
-            get; private set;
+            get { return Id; }
         }
 
-        public AskMeDate AskedOn
+        public virtual string QuestionText
+        {
+            get { return text; }
+        }
+
+        public virtual AskMeDate QuestionAskedOn
         {
             get { return askedOn; }
         }
+       
     }
 }
