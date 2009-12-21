@@ -8,3 +8,4 @@ obj/
 debug
 coverage.xml
 TestResult.xml
+cruise-output
