@@ -5,5 +5,7 @@
       <generator class="native" />
     </id>
     <property name="Username" column="Username" type="String" length="120"/>
+    <property name="EmailId" column="EmailId" type="String" length="120"/>
+    <property name="Password" column="Password" type="String" length="120"/>
   </class>
 </hibernate-mapping>

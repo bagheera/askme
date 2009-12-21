@@ -9,3 +9,5 @@ debug
 coverage.xml
 TestResult.xml
 cruise-output
+Coverage.xml
+TestResult.xml
