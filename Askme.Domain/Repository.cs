@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Askme.Domain
 {
@@ -33,12 +34,12 @@ namespace Askme.Domain
             return true;
         }
 
-        public bool IsUserPresent(string id)
+        public bool IsUserPresent(string userName)
         {
             bool userPresent = false;
-            IQuery query = session.CreateQuery("from User where UserId=" + id);
+            ICriteria query = session.CreateCriteria(typeof (User)).Add(Expression.Eq("Username", userName));
             IList<User> userlist = query.List<User>();
-            if(userlist.Count > 0)
+            if(userlist.Count == 1)
             {
                 userPresent = true;
             }

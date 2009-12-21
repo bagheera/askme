@@ -15,7 +15,7 @@ namespace Askme.Domain
             var user = new User("testuser", "pass123", "user@foo.comsss");
             IRepository repo = Repository.GetInstance();
             repo.SaveUser(user);
-            Assert.IsTrue(repo.IsUserPresent(user.UserId));
+            Assert.IsTrue(repo.IsUserPresent(user.Username));
         }
 
         [Test]
@@ -23,9 +23,10 @@ namespace Askme.Domain
         {
             User user = new User("ShilpaG", "test123", "shilpa@foo.com");
             var mock = new Mock<IRepository>();
-            mock.Setup(ps => ps.IsUserPresent(user.UserId)).Returns(false).AtMostOnce();
+            mock.Setup(ps => ps.IsUserPresent(user.Username)).Returns(false).AtMostOnce();
             mock.Setup(ps => ps.SaveUser(user)).Returns(true).AtMostOnce();
             Assert.IsTrue(user.Register(mock.Object));
+            mock.VerifyAll();
         }
         
     }

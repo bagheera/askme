@@ -47,7 +47,7 @@ namespace Askme.Domain
         public virtual bool Register(IRepository repository)
         {
             bool userRegistered = false;
-            if(!repository.IsUserPresent(this.userId))
+            if(!repository.IsUserPresent(this.username))
             {
                 repository.SaveUser(this);
                 userRegistered = true;
