@@ -27,12 +27,17 @@ namespace Askme.Domain
         {
             string questionText = "What is the use of 'var' key word?";
 <<<<<<< HEAD
+<<<<<<< HEAD
             Question question = new Question(questionText, AskMeDate.CurrentTime);
             Assert.AreEqual(questionText,question.Text);
 =======
             Question question = new Question(questionText);
             Assert.AreEqual(questionText,question.QuestionText);
 >>>>>>> question
+=======
+            Question question = new Question(questionText);
+            Assert.AreEqual(questionText,question.QuestionText);
+>>>>>>> 13325c4... Added Hibernat Code -Shanu/Hari
         }
         [Test]
         public void AskedOnDateShouldDefaultToCurrentDateTime()
@@ -45,7 +50,10 @@ namespace Askme.Domain
 =======
             Question question = new Question(questionText);
             Assert.AreEqual(AskMeDate.CurrentTime.Value, question.QuestionAskedOn.Value);
+<<<<<<< HEAD
 >>>>>>> question
+=======
+>>>>>>> 13325c4... Added Hibernat Code -Shanu/Hari
         }
         [Test]
         public void ShouldCreateOneQuestionInDb()
