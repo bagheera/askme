@@ -10,16 +10,16 @@ namespace Askme.Domain
         public void ShouldBeAbleToGetTheQuestionText()
         {
             string questionText = "What is the use of 'var' key word?";
-            Question question = new Question(questionText, AskMeDate.CurrentTime);
+            Question question = new Question(questionText, AskMeDate.DefaultTime);
             Assert.AreEqual(questionText,question.Text);
         }
         [Test]
         public void AskedOnDateShouldDefaultToCurrentDateTime()
         {
             string questionText = "What is the use of 'var' key word?";
-            AskMeDate.CurrentTime = new AskMeDate();
-            Question question = new Question(questionText, AskMeDate.CurrentTime);
-            Assert.AreEqual(AskMeDate.CurrentTime, question.AskedOn);
+            AskMeDate.DefaultTime = new AskMeDate(new DateTime(2010, 1, 1));
+            Question question = new Question(questionText, new AskMeDate());
+            Assert.AreEqual(AskMeDate.DefaultTime, question.AskedOn);
         }
     }
 }

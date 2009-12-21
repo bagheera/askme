@@ -86,6 +86,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answer.cs" />
+    <Compile Include="AnswerTest.cs" />
     <Compile Include="AskMeDate.cs" />
     <Compile Include="AskMeDateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
