@@ -5,7 +5,7 @@ using NHibernate;
 
 namespace Askme.Domain
 {
-    public class Repository:NHibernateInMemoryBase,IRepository
+    public class Repository:NHibernateInMemoryBase,IRepository, IDisposable
     {
         private ISession session;
 
@@ -43,6 +43,12 @@ namespace Askme.Domain
                 userPresent = true;
             }
             return userPresent;
+        }
+
+
+        public void Dispose()
+        {
+            session.Dispose();
         }
     }
 }
