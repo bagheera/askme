@@ -7,7 +7,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Askme.Domain
 {
-    public class NHibernateInMemoryTestFixtureBase
+    public class NHibernateInMemoryBase
     {
         protected static ISessionFactory SessionFactory;
         protected static Configuration Config;
