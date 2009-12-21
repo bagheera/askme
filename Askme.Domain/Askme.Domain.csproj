@@ -96,6 +96,7 @@
     <Compile Include="QuestionTest.cs" />
     <Compile Include="NHibernateInMemoryBase.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="QuestionTags.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>

@@ -29,6 +29,17 @@ namespace Askme.Domain
             Question question = new Question(questionText);
             Assert.AreEqual(questionText,question.QuestionText);
         }
+        
+        [Test]
+        public void ShouldBeAbleToGetTheQuestionTag()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            List<string> tags = new List<string>();
+            tags.Add("abc");
+            tags.Add("def");
+            Question question = new Question(questionText, tags);
+            Assert.AreEqual(new QuestionTags(tags),question.Tags);
+        }
         [Test]
         public void AskedOnDateShouldDefaultToCurrentDateTime()
         {
