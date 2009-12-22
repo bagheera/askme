@@ -6,6 +6,11 @@ namespace Askme.Domain
     {
         private readonly AskMeDate createdOn;
         private readonly User user;
+        private int answerId;
+
+        protected Answer()
+        {
+        }
 
         public Answer(AskMeDate createdOn, User user)
         {
@@ -13,12 +18,12 @@ namespace Askme.Domain
             this.user = user;
         }
 
-        public User User
+        public virtual User User
         {
             get { return user; }
         }
 
-        public AskMeDate CreatedOn
+        public virtual AskMeDate CreatedOn
         {
             get { return createdOn; }
         }
