@@ -11,11 +11,12 @@ namespace Askme.Domain
         {
             AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
         }
+
         [Test]
         public void AnswerKnowsWhenItWasCreated()
         {
             AskMeDate time = AskMeDate.DefaultTime;
-            Answer answer = new Answer(time, null);
+            Answer answer = new Answer(time, null, "");
             Assert.AreEqual(time, answer.CreatedOn);
         }
 
@@ -24,7 +25,7 @@ namespace Askme.Domain
         {
             const string userName = "PakodaSingh";
             User user = new User(userName, "******", "diptanu@thoughtworks.com");
-            Answer answer = new Answer(AskMeDate.DefaultTime,user);
+            Answer answer = new Answer(AskMeDate.DefaultTime, user, "");
             Assert.AreEqual(user, answer.User);
         }
 
@@ -37,9 +38,18 @@ namespace Askme.Domain
             Console.WriteLine(user.UserId);
             repository.SaveUser(user);
             Console.WriteLine(user.UserId);
-            Answer answer = new Answer(AskMeDate.DefaultTime, user);
+            Answer answer = new Answer(AskMeDate.DefaultTime, user, "");
             repository.SaveAnswer(answer);
             repository.Dispose();
+        }
+
+
+        [Test]
+        public void AnswerShouldHaveText()
+        {
+            const string answerText = "This was supposed to be a funny answer but Chandra couldn't come up with one";
+            Answer answer = new Answer(AskMeDate.DefaultTime, null, answerText);
+            Assert.AreSame(answerText, answer.ToString());
         }
     }
 }

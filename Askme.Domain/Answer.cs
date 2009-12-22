@@ -6,16 +6,18 @@ namespace Askme.Domain
     {
         private readonly AskMeDate createdOn;
         private readonly User user;
+        private readonly string text;
         private int answerId;
 
         protected Answer()
         {
         }
 
-        public Answer(AskMeDate createdOn, User user)
+        public Answer(AskMeDate createdOn, User user, string text)
         {
             this.createdOn = createdOn;
             this.user = user;
+            this.text = text;
         }
 
         public virtual User User
@@ -26,6 +28,11 @@ namespace Askme.Domain
         public virtual AskMeDate CreatedOn
         {
             get { return createdOn; }
+        }
+
+        public override string ToString()
+        {
+            return text;
         }
     }
 }

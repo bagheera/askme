@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 
 namespace Askme.Domain
 {
@@ -47,6 +49,15 @@ namespace Askme.Domain
         {
             get { return askedOn; }
         }
-        
-}
+
+        public virtual int NumberOfAnswers
+        {
+            get { return 1; }
+        }
+
+        public virtual void AddAnswer(Answer answer)
+        {
+            
+        }
+    }
 }
