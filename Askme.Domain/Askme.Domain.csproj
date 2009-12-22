@@ -87,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Answer.cs" />
+    <Compile Include="AnswerMother.cs" />
+    <Compile Include="Answers.cs" />
+    <Compile Include="AnswersTest.cs" />
     <Compile Include="AnswerTest.cs" />
     <Compile Include="AskMeDate.cs" />
     <Compile Include="AskMeDateTest.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Repository.cs" />
     <Compile Include="QuestionTags.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserMother.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>

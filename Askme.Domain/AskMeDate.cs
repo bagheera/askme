@@ -43,5 +43,10 @@ namespace Askme.Domain
             get { return defaultTime; }
             set { defaultTime = new AskMeDate(value.Value); }
         }
+
+        public static AskMeDate CurrentTime
+        {
+            get { return new AskMeDate(DateTime.Now); }
+        }
     }
 }

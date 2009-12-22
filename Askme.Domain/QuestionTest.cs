@@ -67,9 +67,10 @@ namespace Askme.Domain
         {
             AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
             Question question = new Question("What is the use of 'var' key word?");
-            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, ""));
+            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, "first answer"));
             Assert.AreEqual(1, question.NumberOfAnswers);
-
+            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, "second answer"));
+            Assert.AreEqual(2, question.NumberOfAnswers);
         }
     }
 }

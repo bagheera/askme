@@ -11,7 +11,7 @@ namespace Askme.Domain
         private int Id;
         private string text;
         private QuestionTags questionTags;
-
+        private Answers answers = new Answers();
         public Question()
         {
         }
@@ -52,12 +52,12 @@ namespace Askme.Domain
 
         public virtual int NumberOfAnswers
         {
-            get { return 1; }
+            get { return answers.Count; }
         }
 
         public virtual void AddAnswer(Answer answer)
         {
-            
+            answers.AddAnswer(answer);
         }
     }
 }
