@@ -37,6 +37,5 @@ namespace Askme.Domain
         {
             get { return askmeDate; }
         }
-       
     }
 }
