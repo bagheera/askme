@@ -62,5 +62,10 @@ namespace Askme.Domain
         {
             answers.AddAnswer(answer);
         }
+
+        public virtual void AddTags(List<string> list)
+        {
+            this.questionTags = new QuestionTags(list);
+        }
     }
 }

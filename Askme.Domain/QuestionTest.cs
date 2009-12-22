@@ -32,7 +32,7 @@ namespace Askme.Domain
         }
         
         [Test]
-        public void ShouldBeAbleToGetTheQuestionTag()
+        public void ShouldBeAbleToCreateQuestionWithTag()
         {
             string questionText = "What is the use of 'var' key word?";
             List<string> tags = new List<string>();
@@ -41,6 +41,19 @@ namespace Askme.Domain
             User user = new User("shanu", "shanu", "shanu@shanu.com");
             Question question = new Question(questionText,user, tags);
             Assert.AreEqual(new QuestionTags(tags),question.Tags);
+        }
+
+        [Test]
+        public void TestShouldBeAbleToAddTagsToAnExistingQuestion()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question(questionText, user);
+            List<string> tags = new List<string>();
+            tags.Add("abc");
+            tags.Add("def");
+            question.AddTags(tags);
+            Assert.AreEqual(new QuestionTags(tags), question.Tags);
         }
         
         [Test]
