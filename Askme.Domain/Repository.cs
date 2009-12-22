@@ -8,19 +8,20 @@ namespace Askme.Domain
 {
     public class Repository:NHibernateInMemoryBase,IRepository, IDisposable
     {
-        private ISession session;
+        private readonly ISession session;
 
         private static Repository repositoryInstance;
 
         private Repository()
         {
-            InitalizeSessionFactory(new FileInfo("User.hbm.xml"));
+            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
+                new FileInfo("Question.hbm.xml"));
             session = CreateSession();
         }
 
         public static Repository GetInstance()
         {
-            if(repositoryInstance == null)
+            if(repositoryInstance == null)   
             {
                 repositoryInstance = new Repository();
             }
@@ -31,6 +32,12 @@ namespace Askme.Domain
         public void SaveUser(User user)
         {
             session.Save(user);
+        }
+
+        public bool SaveAnswer(Answer answer)
+        {
+            session.Save(answer);
+            return true;
         }
 
         public bool IsUserPresent(string userName)

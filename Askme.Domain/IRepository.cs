@@ -4,5 +4,6 @@ namespace Askme.Domain
     {
         void SaveUser(User user);
         bool IsUserPresent(string id);
+        bool SaveAnswer(Answer answer);
     }
 }

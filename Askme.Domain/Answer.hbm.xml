@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="Askme.Domain" namespace="Askme.Domain">
+  <class name="Askme.Domain.Answer" table="Answer">
+    <id name="answerId" access="field">
+      <generator class="native" />
+    </id>
+    <component name="createdOn" class ="Askme.Domain.AskMeDate" access="field">
+      <property name="askmeDate" column="asked_on" type="Date" access="field"/>
+    </component>
+    <many-to-one name="user" access="field" class="User" column="userId" cascade="none"/>
+  </class>
+</hibernate-mapping>

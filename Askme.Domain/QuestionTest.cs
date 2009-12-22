@@ -54,7 +54,7 @@ namespace Askme.Domain
         public void ShouldCreateOneQuestionInDb()
         {
             string questionText = "What is the use of 'var' key word?";
-            AskMeDate.DefaultTime = new AskMeDate();
+            AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
             Question myFirstQuestion = new Question(questionText);
             session.Save(myFirstQuestion);
             IQuery query = session.CreateQuery("from Question");

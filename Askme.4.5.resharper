@@ -1,0 +1,13 @@
+<Configuration>
+  <SharedSolutionTemplateManager>
+    <LiveTemplates>
+      <Template uid="47e57275-3490-470e-85e0-2d048cb062b6" shortcut="test" description="unit test" text="[Test]&#xD;&#xA;public void $name$()&#xD;&#xA;{&#xD;&#xA;	&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
+        <Categories />
+        <Variables>
+          <Variable name="name" expression="" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+    </LiveTemplates>
+  </SharedSolutionTemplateManager>
+</Configuration>
