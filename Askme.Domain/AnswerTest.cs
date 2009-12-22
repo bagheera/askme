@@ -55,8 +55,8 @@ namespace Askme.Domain
         [Test]
         public void IfUserAndDateAndTextAreSameThenAnswersAreEqual()
         {
-            Answer answer1 = new Answer(AskMeDate.DefaultTime, UserMother.Kamal, "this is good answer");
-            Answer answer2 = new Answer(AskMeDate.DefaultTime, UserMother.Kamal, "this is good answer");
+            Answer answer1 = new Answer(new AskMeDate(), UserMother.Kamal, "this is good answer");
+            Answer answer2 = new Answer(new AskMeDate(), UserMother.Kamal, "this is good answer");
             Assert.AreEqual(answer1, answer2);
         }
     }

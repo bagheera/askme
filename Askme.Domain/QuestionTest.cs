@@ -56,9 +56,9 @@ namespace Askme.Domain
         public void ShouldCollectAnswers()
         {
             Question question = new Question("What is the use of 'var' key word?");
-            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, "first answer"));
+            question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
             Assert.AreEqual(1, question.NumberOfAnswers);
-            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, "second answer"));
+            question.AddAnswer(new Answer(new AskMeDate(), null, "second answer"));
             Assert.AreEqual(2, question.NumberOfAnswers);
         }
     }
