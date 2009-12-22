@@ -29,10 +29,9 @@ namespace Askme.Domain
             return repositoryInstance;
         }
 
-        public bool SaveUser(User user)
+        public void SaveUser(User user)
         {
             session.Save(user);
-            return true;
         }
 
         public bool SaveAnswer(Answer answer)

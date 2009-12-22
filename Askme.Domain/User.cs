@@ -49,8 +49,14 @@ namespace Askme.Domain
             bool userRegistered = false;
             if(!repository.IsUserPresent(this.username))
             {
-                repository.SaveUser(this);
-                userRegistered = true;
+                try
+                {
+                    repository.SaveUser(this);
+                    userRegistered = true;
+                }catch(Exception e)
+                {
+                    userRegistered = false;
+                }
             }
             return userRegistered;
         }
