@@ -6,12 +6,6 @@ namespace Askme.Domain
     [TestFixture]
     public class AnswerTest
     {
-        [SetUp]
-        public void Setup()
-        {
-            
-        }
-
         [Test]
         public void AnswerKnowsWhenItWasCreated()
         {
