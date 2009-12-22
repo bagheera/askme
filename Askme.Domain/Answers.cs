@@ -4,7 +4,7 @@ namespace Askme.Domain
 {
     public class Answers
     {
-        private readonly List<Answer> answers = new List<Answer>();
+        private readonly IList<Answer> answers = new List<Answer>();
 
         public void AddAnswer(Answer answer)
         {

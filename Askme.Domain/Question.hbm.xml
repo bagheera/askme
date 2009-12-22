@@ -8,5 +8,12 @@
     <component name="askedOn" class ="Askme.Domain.AskMeDate" access="field">
       <property name="askmeDate" column="asked_on" type="Date" access="field"/>
     </component>
+    
+    <component name="answers" class ="Askme.Domain.Answers" access="field">
+      <bag name="answers" cascade="all-delete-orphan" access="field">
+        <key column="questionId"/>
+        <one-to-many class="Answer" />
+      </bag>
+    </component>
   </class>
 </hibernate-mapping>
