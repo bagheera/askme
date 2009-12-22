@@ -14,7 +14,8 @@ namespace Askme.Domain
 
         private Repository()
         {
-            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"));
+            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
+                new FileInfo("Question.hbm.xml"));
             session = CreateSession();
         }
 
