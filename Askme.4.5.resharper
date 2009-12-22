@@ -8,6 +8,14 @@
         </Variables>
         <CustomProperties />
       </Template>
+      <Template uid="d37e0ba0-5912-44b2-9b3b-49b318e761a2" shortcut="asse" description="assert" text="Assert.AreEqual($expected$,$actual$);" reformat="True" shortenQualifiedReferences="True">
+        <Categories />
+        <Variables>
+          <Variable name="expected" expression="" initialRange="0" />
+          <Variable name="actual" expression="" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
     </LiveTemplates>
   </SharedSolutionTemplateManager>
 </Configuration>

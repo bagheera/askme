@@ -11,7 +11,7 @@ namespace Askme.Domain
             Answers answers = new Answers();
             answers.AddAnswer(AnswerMother.KamalsGoodAnswer);
             Assert.AreEqual(1, answers.Count);
-            answers.AddAnswer(AnswerMother.KamalsBadAnswer());
+            answers.AddAnswer(AnswerMother.KamalsBadAnswer);
             Assert.AreEqual(2, answers.Count);
         }
     }

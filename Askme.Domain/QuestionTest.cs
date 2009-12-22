@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using NHibernate;
 using NUnit.Framework;
@@ -7,46 +6,45 @@ using NUnit.Framework;
 namespace Askme.Domain
 {
     [TestFixture]
-    public class QuestionTest:NHibernateInMemoryBase
+    public class QuestionTest : NHibernateInMemoryBase
     {
         private ISession session;
+
         [TestFixtureSetUp]
         public void SuiteSetup()
         {
-            InitalizeSessionFactory(new FileInfo("Question.hbm.xml"));
+            InitalizeSessionFactory(new FileInfo("Question.hbm.xml"), new FileInfo("Answer.hbm.xml"), new FileInfo("User.hbm.xml"));
         }
 
         [SetUp]
         public void TestSetup()
         {
-            session = this.CreateSession();
+            session = CreateSession();
         }
 
         [Test]
         public void ShouldBeAbleToGetTheQuestionText()
         {
-            string questionText = "What is the use of 'var' key word?";
+            const string questionText = "What is the use of 'var' key word?";
             Question question = new Question(questionText);
-            Assert.AreEqual(questionText,question.QuestionText);
+            Assert.AreEqual(questionText, question.QuestionText);
         }
-        
+
         [Test]
         public void ShouldBeAbleToGetTheQuestionTag()
         {
-            string questionText = "What is the use of 'var' key word?";
-            List<string> tags = new List<string>();
-            tags.Add("abc");
-            tags.Add("def");
+            const string questionText = "What is the use of 'var' key word?";
+            List<string> tags = new List<string> {"abc", "def"};
             Question question = new Question(questionText, tags);
-            Assert.AreEqual(new QuestionTags(tags),question.Tags);
+            Assert.AreEqual(new QuestionTags(tags), question.Tags);
         }
-        
+
         [Test]
         public void ShouldCreateOneQuestionInDb()
         {
-            string questionText = "What is the use of 'var' key word?";
-            Question myFirstQuestion = new Question(questionText);
-            session.Save(myFirstQuestion);
+            const string questionText = "What is the use of 'var' key word?";
+            Question question = new Question(questionText);
+            session.Save(question);
             IQuery query = session.CreateQuery("from Question");
             IList<Question> questions = query.List<Question>();
             Assert.AreEqual(1, questions.Count);
@@ -60,6 +58,18 @@ namespace Askme.Domain
             Assert.AreEqual(1, question.NumberOfAnswers);
             question.AddAnswer(new Answer(new AskMeDate(), null, "second answer"));
             Assert.AreEqual(2, question.NumberOfAnswers);
+        }
+
+        [Test]
+        public void ShouldSaveAnswersToQuestion()
+        {
+            const string questionText = "What is the use of 'var' key word?";
+            Question question = new Question(questionText);
+            question.AddAnswer(AnswerMother.KamalsBadAnswer);
+            session.Save(question);
+            IQuery query = session.CreateQuery("from Answer");
+            IList<Answer> answers = query.List<Answer>();
+            Assert.AreEqual(1, answers.Count);
         }
     }
 }

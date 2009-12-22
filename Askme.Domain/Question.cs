@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 
 namespace Askme.Domain
 {
@@ -12,6 +10,7 @@ namespace Askme.Domain
         private string text;
         private QuestionTags questionTags;
         private Answers answers = new Answers();
+
         public Question()
         {
         }
@@ -22,12 +21,11 @@ namespace Askme.Domain
             askedOn = new AskMeDate();
         }
 
-        public Question(string text, List<string>tags)
+        public Question(string text, List<string> tags)
         {
             this.text = text;
-            this.questionTags = new QuestionTags(tags);
+            questionTags = new QuestionTags(tags);
             askedOn = new AskMeDate();
-            
         }
 
         public virtual int QuestionId
@@ -42,7 +40,7 @@ namespace Askme.Domain
 
         public virtual QuestionTags Tags
         {
-            get { return questionTags;  }
+            get { return questionTags; }
         }
 
         public virtual AskMeDate QuestionAskedOn
@@ -50,14 +48,14 @@ namespace Askme.Domain
             get { return askedOn; }
         }
 
-        public virtual int NumberOfAnswers
-        {
-            get { return answers.Count; }
-        }
-
         public virtual void AddAnswer(Answer answer)
         {
             answers.AddAnswer(answer);
+        }
+
+        public virtual int NumberOfAnswers
+        {
+            get { return answers.Count; }
         }
     }
 }
