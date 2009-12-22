@@ -18,8 +18,8 @@ namespace Askme.Domain
         public void NowShouldChangeAsAssigned()
         {
             DateTime jan2010 = new DateTime(2010, 1, 1);
-            AskMeDate.DefaultTime = new AskMeDate(jan2010);
-            Assert.AreEqual(jan2010, AskMeDate.DefaultTime.Value);
+            AskMeDate date = new AskMeDate(jan2010);
+            Assert.AreEqual(jan2010, date.Value);
         }
     }
 }

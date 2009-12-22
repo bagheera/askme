@@ -40,21 +40,11 @@ namespace Askme.Domain
             Question question = new Question(questionText, tags);
             Assert.AreEqual(new QuestionTags(tags),question.Tags);
         }
-        [Test]
-        public void AskedOnDateShouldDefaultToCurrentDateTime()
-        {
-            string questionText = "What is the use of 'var' key word?";
-   
-            AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
-
-            Question question = new Question(questionText);
-            Assert.AreEqual(AskMeDate.DefaultTime.Value, question.QuestionAskedOn.Value);
-        }
+        
         [Test]
         public void ShouldCreateOneQuestionInDb()
         {
             string questionText = "What is the use of 'var' key word?";
-            AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
             Question myFirstQuestion = new Question(questionText);
             session.Save(myFirstQuestion);
             IQuery query = session.CreateQuery("from Question");
@@ -65,9 +55,8 @@ namespace Askme.Domain
         [Test]
         public void ShouldCollectAnswers()
         {
-            AskMeDate.DefaultTime = new AskMeDate(DateTime.Now);
             Question question = new Question("What is the use of 'var' key word?");
-            question.AddAnswer(new Answer(AskMeDate.DefaultTime, null, ""));
+            question.AddAnswer(new Answer(new AskMeDate(), null, ""));
             Assert.AreEqual(1, question.NumberOfAnswers);
 
         }

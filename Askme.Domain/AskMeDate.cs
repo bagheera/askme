@@ -5,12 +5,12 @@ namespace Askme.Domain
     public class AskMeDate
     {
         private readonly DateTime askmeDate;
-        private static AskMeDate defaultTime;
+        
 
         public AskMeDate()
         {
-            if (defaultTime == null) throw new ArgumentNullException();
-            this.askmeDate = defaultTime.Value;
+            //if (defaultTime == null) throw new ArgumentNullException();
+            this.askmeDate = DateTime.Now;
         }
 
         public AskMeDate(DateTime dateTime)
@@ -37,11 +37,6 @@ namespace Askme.Domain
         {
             get { return askmeDate; }
         }
-
-        public static AskMeDate DefaultTime
-        {
-            get { return defaultTime; }
-            set { defaultTime = new AskMeDate(value.Value); }
-        }
+       
     }
 }
