@@ -7,6 +7,7 @@ namespace Askme.Domain
     public class Question
     {
         private readonly AskMeDate askedOn;
+        private User user;
 
         private int Id;
         private string text;
@@ -16,16 +17,18 @@ namespace Askme.Domain
         {
         }
 
-        public Question(string text)
+        public Question(string text,User user)
         {
             this.text = text;
+            this.user = user;
             askedOn = new AskMeDate();
         }
 
-        public Question(string text, List<string>tags)
+        public Question(string text,User user, List<string>tags)
         {
             this.text = text;
             this.questionTags = new QuestionTags(tags);
+            this.user = user;
             askedOn = new AskMeDate();
             
         }

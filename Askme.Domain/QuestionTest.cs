@@ -26,7 +26,8 @@ namespace Askme.Domain
         public void ShouldBeAbleToGetTheQuestionText()
         {
             string questionText = "What is the use of 'var' key word?";
-            Question question = new Question(questionText);
+            User user = new User("shanu","shanu","shanu@shanu.com");
+            Question question = new Question(questionText,user);
             Assert.AreEqual(questionText,question.QuestionText);
         }
         
@@ -37,7 +38,8 @@ namespace Askme.Domain
             List<string> tags = new List<string>();
             tags.Add("abc");
             tags.Add("def");
-            Question question = new Question(questionText, tags);
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question(questionText,user, tags);
             Assert.AreEqual(new QuestionTags(tags),question.Tags);
         }
         
@@ -45,7 +47,8 @@ namespace Askme.Domain
         public void ShouldCreateOneQuestionInDb()
         {
             string questionText = "What is the use of 'var' key word?";
-            Question myFirstQuestion = new Question(questionText);
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question myFirstQuestion = new Question(questionText,user);
             session.Save(myFirstQuestion);
             IQuery query = session.CreateQuery("from Question");
             IList<Question> questions = query.List<Question>();
@@ -55,7 +58,9 @@ namespace Askme.Domain
         [Test]
         public void ShouldCollectAnswers()
         {
-            Question question = new Question("What is the use of 'var' key word?");
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question("What is the use of 'var' key word?",user);
+
             question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
             Assert.AreEqual(1, question.NumberOfAnswers);
             question.AddAnswer(new Answer(new AskMeDate(), null, "second answer"));
