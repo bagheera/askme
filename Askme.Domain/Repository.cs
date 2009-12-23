@@ -43,6 +43,10 @@ namespace Askme.Domain
             return true;
         }
 
+        public void SaveQuestion(Question question)
+        {
+            session.Save(question);
+        }
         public bool IsUserPresent(string userName)
         {
             bool userPresent = false;
@@ -61,8 +65,19 @@ namespace Askme.Domain
             session.Dispose();
         }
 
-        public void	 SaveQuestion(Question question)
+
+        public IList<Question> SearchKeyWordInQuestion(string searchString)
         {
+            ICriteria query = session.CreateCriteria(typeof(Question)).Add(Expression.Like("text", "%" + searchString + "%"));
+            IList<Question> questionlist = query.List<Question>();
+            return questionlist;
+        }
+
+        public IList<Answer> SearchKeyWordInAnswers(string searchString)         
+        {
+            ICriteria query = session.CreateCriteria(typeof(Answer)).Add(Expression.Like("text", "%" + searchString + "%"));
+            IList<Answer> answerlist = query.List<Answer>();
+            return answerlist;
         }
     }
 }
