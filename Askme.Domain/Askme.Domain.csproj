@@ -100,6 +100,7 @@
     <Compile Include="NHibernateInMemoryBase.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="QuestionTags.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserMother.cs" />
     <Compile Include="UserTest.cs" />
@@ -116,6 +117,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Answer.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tags.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

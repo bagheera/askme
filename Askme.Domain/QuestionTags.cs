@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -5,27 +6,28 @@ namespace Askme.Domain
 {
     public class QuestionTags
     {
-        private List<string> tags;
+        private List<Tag> tags;
 
-        public QuestionTags(List<string> tags)
+        public QuestionTags()
         {
-            this.tags = tags;
-        }
-        public int Add(object value)
-        {
-            return ((IList) tags).Add(value);
+            tags = new List<Tag>();
         }
 
-        public void Add(string item)
+        public void Add(Tag item)
         {
-            tags.Add(item);
+            Tags.Add(item);
+        }
+
+        public IList<Tag> Tags
+        {
+            get { return tags; }
         }
 
         public bool Equals(QuestionTags other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.tags, tags);
+            return Equals(other.Tags, Tags);
         }
 
         public override bool Equals(object obj)
@@ -38,7 +40,7 @@ namespace Askme.Domain
 
         public override int GetHashCode()
         {
-            return (tags != null ? tags.GetHashCode() : 0);
+            return (Tags != null ? Tags.GetHashCode() : 0);
         }
     }
 }
