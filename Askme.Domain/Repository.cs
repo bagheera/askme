@@ -16,20 +16,18 @@ namespace Askme.Domain
 
         private Repository()
         {
-            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
-                new FileInfo("Question.hbm.xml"));
+            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), 
+                new FileInfo("Answer.hbm.xml"),
+                new FileInfo("Question.hbm.xml"), 
+                new FileInfo("Tag.hbm.xml"));
             session = CreateSession();
-            
         }
 
 
         public static Repository GetInstance()
         {
             if(repositoryInstance == null)   
-            {
                 repositoryInstance = new Repository();
-               
-            }
 
             return repositoryInstance;
         }
@@ -87,6 +85,20 @@ namespace Askme.Domain
             session.Save(t);
             session.Flush();
             return true;
+        }
+
+        public IList<Question> SearchKeyWordInQuestion(string searchString)
+        {
+            ICriteria query = session.CreateCriteria(typeof(Question)).Add(Expression.Like("text", "%" + searchString + "%"));
+            IList<Question> questionlist = query.List<Question>();
+            return questionlist;
+        }
+
+        public IList<Answer> SearchKeyWordInAnswers(string searchString)         
+        {
+            ICriteria query = session.CreateCriteria(typeof(Answer)).Add(Expression.Like("text", "%" + searchString + "%"));
+            IList<Answer> answerlist = query.List<Answer>();
+            return answerlist;
         }
     }
 }

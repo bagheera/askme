@@ -1,22 +1,21 @@
 namespace Askme.Domain
 {
     public class AnswerMother{
-        
-        public static Answer KamalsGoodAnswer
+        public static Answer KamalsGoodAnswer(User user)
         {
-            get { return new Answer(new AskMeDate(), UserMother.Kamal, "this is good answer"); }
+            return new Answer(new AskMeDate(), user, "this is good answer");
         }
 
-        public static Answer KamalsBadAnswer
+        public static Answer KamalsBadAnswer(User user)
         {
-            get { return new Answer(new AskMeDate(), UserMother.Kamal, "this is bad answer"); }
+            return new Answer(new AskMeDate(), user, "this is bad answer");
         }
 
         public static Answers KamalsAnswers()
         {
             Answers answers = new Answers();
-            answers.AddAnswer(KamalsGoodAnswer);
-            answers.AddAnswer(KamalsBadAnswer);
+            answers.AddAnswer(KamalsGoodAnswer(UserMother.Kamal));
+            answers.AddAnswer(KamalsBadAnswer(UserMother.Kamal));
             return answers;
         }
     }

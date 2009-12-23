@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Askme.Domain
@@ -9,7 +10,7 @@ namespace Askme.Domain
 
         private int id;
         private string text;
-        private QuestionTags questionTags = new QuestionTags();
+        private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
 
         public Question()
@@ -33,9 +34,9 @@ namespace Askme.Domain
             get { return text; }
         }
 
-        public virtual QuestionTags GetTags
+        public virtual IList<Tag> Tags
         {
-            get { return questionTags; }
+            get { return tags; }
         }
 
         public virtual AskMeDate QuestionAskedOn
@@ -55,14 +56,14 @@ namespace Askme.Domain
 
         public virtual void AddTags(Tag tag)
         {
-            this.questionTags.Add(tag);
+            tags.Add(tag);
         }
 
         public virtual bool Equals(Question other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.askedOn, askedOn) && Equals(other.user, user) && Equals(other.text, text) && Equals(other.questionTags, questionTags) && Equals(other.answers, answers);
+            return Equals(other.askedOn, askedOn) && Equals(other.user, user) && Equals(other.text, text) && Equals(other.tags, tags) && Equals(other.answers, answers);
         }
 
         public override bool Equals(object obj)
@@ -80,7 +81,7 @@ namespace Askme.Domain
                 int result = (askedOn != null ? askedOn.GetHashCode() : 0);
                 result = (result*397) ^ (user != null ? user.GetHashCode() : 0);
                 result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
-                result = (result*397) ^ (questionTags != null ? questionTags.GetHashCode() : 0);
+                result = (result*397) ^ (tags != null ? tags.GetHashCode() : 0);
                 result = (result*397) ^ (answers != null ? answers.GetHashCode() : 0);
                 return result;
             }

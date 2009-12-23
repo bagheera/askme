@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="Askme.Domain" namespace="Askme.Domain">
+  <class name="Askme.Domain.Tag" table="Tag">
+    <id name="tagId" access="field">
+      <generator class="native" />
+    </id>
+    <property name="tagName" column="TagName" type="string" length="120" access="field"/>
+
+    <bag name="questions" table="question_tag" cascade="all" access="field">
+      <key column="TagId"/>
+      <many-to-many column="QuestionId" class="Askme.Domain.Question" />
+    </bag>
+    
+  </class>
+</hibernate-mapping>

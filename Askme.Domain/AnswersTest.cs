@@ -9,9 +9,9 @@ namespace Askme.Domain
         public void AddAnswer()
         {
             Answers answers = new Answers();
-            answers.AddAnswer(AnswerMother.KamalsGoodAnswer);
+            answers.AddAnswer(AnswerMother.KamalsGoodAnswer(UserMother.Kamal));
             Assert.AreEqual(1, answers.Count);
-            answers.AddAnswer(AnswerMother.KamalsBadAnswer);
+            answers.AddAnswer(AnswerMother.KamalsBadAnswer(UserMother.Kamal));
             Assert.AreEqual(2, answers.Count);
         }
     }

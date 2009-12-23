@@ -11,5 +11,7 @@ namespace Askme.Domain
         void AbortTransaction();
         void SaveQuestion(Question question);
         IList<Answer> LoadAnswerForQuestion(Question question);
+        IList<Question> SearchKeyWordInQuestion(string s);
+        IList<Answer> SearchKeyWordInAnswers(string s);
     }
 }

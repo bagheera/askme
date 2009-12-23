@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using NHibernate;
+using NHibernate.Criterion;
 using NUnit.Framework;
 
 namespace Askme.Domain
@@ -31,8 +32,8 @@ namespace Askme.Domain
             question.AddTags(csharpTag);
             question.AddTags(javaTag);
 
-            Assert.AreEqual(csharpTag, question.GetTags.Tags[0]);
-            Assert.AreEqual(javaTag, question.GetTags.Tags[1]);
+            Assert.AreEqual(csharpTag, question.Tags[0]);
+            Assert.AreEqual(javaTag, question.Tags[1]);
 
         }
 
@@ -56,11 +57,31 @@ namespace Askme.Domain
             repository.SaveUser(user);
             const string questionText = "What is the use of 'var' key word?";
             Question question = new Question(questionText,user);
-            Answer ans = new Answer(new AskMeDate(), user, "this is bad answer");
-            question.AddAnswer(ans);
+            question.AddAnswer(new Answer(new AskMeDate(), user, "this is bad answer"));
             repository.SaveQuestion(question);
             IList<Answer> answers = repository.LoadAnswerForQuestion(question);
             Assert.AreEqual(1, answers.Count);
         }
+
+        [Test]
+        public void ShouldBeAbleToSearchQuestionsBasedOnAKeyword()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            string searchString = "word";
+            User user = UserMother.Kamal;
+            Question question = new Question(questionText, user);
+        
+            Repository repository = Repository.GetInstance();
+
+            int count = repository.SearchKeyWordInQuestion(searchString).Count;
+            repository.SaveUser(user);
+            repository.SaveQuestion(question);
+            IList<Question> questionsFound = repository.SearchKeyWordInQuestion(searchString);
+  
+            Assert.AreEqual(count + 1,questionsFound.Count);
+
+        }
+
+        
     }
 }

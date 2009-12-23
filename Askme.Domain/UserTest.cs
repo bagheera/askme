@@ -10,7 +10,7 @@ namespace Askme.Domain
     [TestFixture]
     public class UserTest
     {
-        [Test, Ignore]
+        [Test]
         public void TestUserCreation()
         {
             var user = new User("testuser", "pass123", "user@foo.comsss");
