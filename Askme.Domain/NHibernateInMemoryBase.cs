@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using NHibernate;
 using NHibernate.Cfg;
@@ -43,8 +44,19 @@ namespace Askme.Domain
         {
             ISession openSession = SessionFactory.OpenSession();
             IDbConnection connection = openSession.Connection;
-            new SchemaExport(Config).Execute(false, true, false, connection, null);
+            SQLiteCommand command = new SQLiteCommand((SQLiteConnection)connection)
+                                        {
+                                            CommandType = CommandType.Text,
+                                            CommandText = ReadSchema()
+                                        };
+            command.ExecuteNonQuery();
             return openSession;
+        }
+
+
+        private static string ReadSchema()
+        {
+            return File.ReadAllText("../../../schema.sql");
         }
     }
 }

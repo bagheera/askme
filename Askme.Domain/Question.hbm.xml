@@ -6,7 +6,7 @@
     </id>
    <property name="text" column="Text" type="string" length="120" access="field"/>
     <component name="askedOn" class ="Askme.Domain.AskMeDate" access="field">
-      <property name="askmeDate" column="asked_on" type="Date" access="field"/>
+      <property name="askmeDate" column="askedOn" type="Date" access="field"/>
     </component>
     
     <component name="answers" class ="Askme.Domain.Answers" access="field">
