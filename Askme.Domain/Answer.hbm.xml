@@ -5,8 +5,9 @@
       <generator class="native" />
     </id>
     <component name="createdOn" class ="Askme.Domain.AskMeDate" access="field">
-      <property name="askmeDate" column="asked_on" type="Date" access="field"/>
+      <property name="askmeDate" column="createdOn" type="Date" access="field"/>
     </component>
     <many-to-one name="user" access="field" class="User" column="userId" cascade="none"/>
+    <property name="text" column="Text" type="string" access="field"/>
   </class>
 </hibernate-mapping>

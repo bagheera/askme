@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using NHibernate;
 using NHibernate.Criterion;
@@ -17,13 +19,18 @@ namespace Askme.Domain
             InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
                 new FileInfo("Question.hbm.xml"), new FileInfo("Tag.hbm.xml"));
             session = CreateSession();
+
+
+            
         }
+
 
         public static Repository GetInstance()
         {
             if(repositoryInstance == null)   
             {
                 repositoryInstance = new Repository();
+               
             }
 
             return repositoryInstance;
