@@ -7,7 +7,7 @@ namespace Askme.Domain
         private readonly AskMeDate askedOn;
         private User user;
 
-        private int Id;
+        private int id;
         private string text;
         private QuestionTags questionTags = new QuestionTags();
         private Answers answers = new Answers();
@@ -25,7 +25,7 @@ namespace Askme.Domain
 
         public virtual int QuestionId
         {
-            get { return Id; }
+            get { return id; }
         }
 
         public virtual string QuestionText
@@ -56,6 +56,34 @@ namespace Askme.Domain
         public virtual void AddTags(Tag tag)
         {
             this.questionTags.Add(tag);
+        }
+
+        public virtual bool Equals(Question other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.askedOn, askedOn) && Equals(other.user, user) && Equals(other.text, text) && Equals(other.questionTags, questionTags) && Equals(other.answers, answers);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (Question)) return false;
+            return Equals((Question) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = (askedOn != null ? askedOn.GetHashCode() : 0);
+                result = (result*397) ^ (user != null ? user.GetHashCode() : 0);
+                result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
+                result = (result*397) ^ (questionTags != null ? questionTags.GetHashCode() : 0);
+                result = (result*397) ^ (answers != null ? answers.GetHashCode() : 0);
+                return result;
+            }
         }
     }
 }

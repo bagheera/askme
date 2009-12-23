@@ -19,8 +19,6 @@ namespace Askme.Domain
             InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
                 new FileInfo("Question.hbm.xml"));
             session = CreateSession();
-
-
             
         }
 
@@ -38,13 +36,12 @@ namespace Askme.Domain
 
         public void SaveUser(User user)
         {
-            session.Save(user);
+            Save(user);
         }
 
         public bool SaveAnswer(Answer answer)
         {
-            session.Save(answer);
-            return true;
+            return Save(answer);
         }
 
         public bool IsUserPresent(string userName)
@@ -63,6 +60,33 @@ namespace Askme.Domain
         public void Dispose()
         {
             session.Dispose();
+        }
+
+        public void BeginTransaction()
+        {
+            session.BeginTransaction();
+        }
+
+        public void AbortTransaction()
+        {
+            session.Transaction.Rollback();
+        }
+
+        public void SaveQuestion(Question question)
+        {
+            Save(question);
+        }
+
+        public IList<Answer> LoadAnswerForQuestion(Question question)
+        {
+            return session.CreateQuery("from Answer where questionId = " + question.QuestionId).List<Answer>();
+        }
+
+        private bool Save<T>(T t)
+        {
+            session.Save(t);
+            session.Flush();
+            return true;
         }
     }
 }

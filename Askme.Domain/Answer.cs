@@ -9,6 +9,11 @@ namespace Askme.Domain
         private readonly string text;
         private int answerId;
 
+        public virtual int AnswerId
+        {
+            get { return answerId; }
+        }
+
         protected Answer()
         {
         }

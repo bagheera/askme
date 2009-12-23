@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="Askme.Domain" namespace="Askme.Domain">
   <class name="Askme.Domain.User" table="User">
-    <id name="UserId">
-      <generator class="native" />
+    <id name="UserId" column="UserId" type="int">
+      <generator class="increment" />
     </id>
     <property name="Username" column="Username" type="String" length="120"/>
     <property name="EmailId" column="EmailId" type="String" length="120"/>

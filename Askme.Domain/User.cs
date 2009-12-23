@@ -7,7 +7,7 @@ namespace Askme.Domain
         private string username;
         private string emailId;
         private string password;
-        private string userId;
+        private int userId;
 
         public User(string username, string password, string emailId)
         {
@@ -38,7 +38,7 @@ namespace Askme.Domain
             set { username = value; }
         }
 
-        public virtual string UserId
+        public virtual int UserId
         {
             get { return userId; }
             set { userId = value; }

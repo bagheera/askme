@@ -6,6 +6,7 @@ namespace Askme.Domain
     [TestFixture]
     public class AnswerTest
     {
+       
         [Test]
         public void AnswerKnowsWhenItWasCreated()
         {
@@ -26,15 +27,13 @@ namespace Askme.Domain
         [Test]
         public void VerifyAnswerInsertion()
         {
-            Repository repository = Repository.GetInstance();
+            
             User user = new User("PakodaSingh", "******", "diptanu@thoughtworks.com");
-            user.UserId = "1";
-            Console.WriteLine(user.UserId);
+            user.UserId = 1;
+            Repository repository = Repository.GetInstance();
             repository.SaveUser(user);
-            Console.WriteLine(user.UserId);
             Answer answer = new Answer(new AskMeDate(),  user, "");
             repository.SaveAnswer(answer);
-            repository.Dispose();
         }
 
 

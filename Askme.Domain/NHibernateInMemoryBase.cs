@@ -23,7 +23,7 @@ namespace Askme.Domain
                                      {"connection.driver_class", "NHibernate.Driver.SQLite20Driver"},
                                      {"dialect", "NHibernate.Dialect.SQLiteDialect"},
                                      {"connection.provider", "NHibernate.Connection.DriverConnectionProvider"},
-                                     {"connection.connection_string", "Data Source=:memory:;Version=3;New=True;"},
+                                     {"connection.connection_string", "Data Source=askme.db;Version=3;New=True;"},
                                      {"connection.release_mode", "on_close"},
                                      {"show_sql", "true"},
                                      {"proxyfactory.factory_class", "NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle"}

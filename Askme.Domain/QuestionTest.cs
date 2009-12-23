@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using NHibernate;
 using NUnit.Framework;
@@ -8,20 +9,7 @@ namespace Askme.Domain
     [TestFixture]
     public class QuestionTest : NHibernateInMemoryBase
     {
-        private ISession session;
-
-        [TestFixtureSetUp]
-        public void SuiteSetup()
-        {
-            InitalizeSessionFactory(new FileInfo("Question.hbm.xml"), new FileInfo("Answer.hbm.xml"), new FileInfo("User.hbm.xml"));
-        }
-
-        [SetUp]
-        public void TestSetup()
-        {
-            session = CreateSession();
-        }
-
+       
         [Test]
         public void ShouldBeAbleToGetTheQuestionText()
         {
@@ -48,19 +36,6 @@ namespace Askme.Domain
 
         }
 
-
-        [Test]
-        public void ShouldCreateOneQuestionInDb()
-        {
-            string questionText = "What is the use of 'var' key word?";
-            User user = new User("shanu", "shanu", "shanu@shanu.com");
-            Question myFirstQuestion = new Question(questionText,user);
-            session.Save(myFirstQuestion);
-            IQuery query = session.CreateQuery("from Question");
-            IList<Question> questions = query.List<Question>();
-            Assert.AreEqual(1, questions.Count);
-        }
-
         [Test]
         public void ShouldCollectAnswers()
         {
@@ -76,12 +51,15 @@ namespace Askme.Domain
         [Test]
         public void ShouldSaveAnswersToQuestion()
         {
+            User user = UserMother.Kamal;
+            Repository repository = Repository.GetInstance();
+            repository.SaveUser(user);
             const string questionText = "What is the use of 'var' key word?";
-            Question question = new Question(questionText,UserMother.Kamal);
-            question.AddAnswer(AnswerMother.KamalsBadAnswer);
-            session.Save(question);
-            IQuery query = session.CreateQuery("from Answer");
-            IList<Answer> answers = query.List<Answer>();
+            Question question = new Question(questionText,user);
+            Answer ans = new Answer(new AskMeDate(), user, "this is bad answer");
+            question.AddAnswer(ans);
+            repository.SaveQuestion(question);
+            IList<Answer> answers = repository.LoadAnswerForQuestion(question);
             Assert.AreEqual(1, answers.Count);
         }
     }

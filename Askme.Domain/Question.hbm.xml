@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="Askme.Domain" namespace="Askme.Domain">
   <class name="Askme.Domain.Question" table="Question">
-    <id name="Id" access="field">
-      <generator class="native" />
+    <id name="id" access="field" type="int" column="Id" unsaved-value="0">
+      <generator class="increment" />
     </id>
    <property name="text" column="Text" type="string" length="120" access="field"/>
     <component name="askedOn" class ="Askme.Domain.AskMeDate" access="field">
