@@ -35,27 +35,19 @@ namespace Askme.Domain
         public void ShouldBeAbleToCreateQuestionWithTag()
         {
             string questionText = "What is the use of 'var' key word?";
-            List<string> tags = new List<string>();
-            tags.Add("abc");
-            tags.Add("def");
+            Tag csharpTag = new Tag("C#");
+            Tag javaTag = new Tag("Java");
+
             User user = new User("shanu", "shanu", "shanu@shanu.com");
-            Question question = new Question(questionText,user, tags);
-            Assert.AreEqual(new QuestionTags(tags),question.Tags);
+            Question question = new Question(questionText,user);
+            question.AddTags(csharpTag);
+            question.AddTags(javaTag);
+
+            Assert.AreEqual(csharpTag, question.GetTags.Tags[0]);
+            Assert.AreEqual(javaTag, question.GetTags.Tags[1]);
+
         }
 
-        [Test]
-        public void TestShouldBeAbleToAddTagsToAnExistingQuestion()
-        {
-            string questionText = "What is the use of 'var' key word?";
-            User user = new User("shanu", "shanu", "shanu@shanu.com");
-            Question question = new Question(questionText, user);
-            List<string> tags = new List<string>();
-            tags.Add("abc");
-            tags.Add("def");
-            question.AddTags(tags);
-            Assert.AreEqual(new QuestionTags(tags), question.Tags);
-        }
-        
 
         [Test]
         public void ShouldCreateOneQuestionInDb()
