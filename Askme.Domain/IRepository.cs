@@ -9,5 +9,6 @@ namespace Askme.Domain
         bool SaveAnswer(Answer answer);
         IList<Question> SearchKeyWordInQuestion(string s);
         void SaveQuestion(Question question);
+        IList<Answer> SearchKeyWordInAnswers(string s);
     }
 }

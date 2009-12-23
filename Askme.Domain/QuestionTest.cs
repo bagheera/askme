@@ -96,11 +96,11 @@ namespace Askme.Domain
             Repository repository = Repository.GetInstance();
             repository.SaveQuestion(question);
             IList<Question> questionsFound = repository.SearchKeyWordInQuestion(searchString);
-            
-            
-         
+  
             Assert.AreEqual(1,questionsFound.Count);
 
         }
+
+        
     }
 }

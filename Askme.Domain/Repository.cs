@@ -75,6 +75,13 @@ namespace Askme.Domain
             ICriteria query = session.CreateCriteria(typeof(Question)).Add(Expression.Like("text", "%" + searchString + "%"));
             IList<Question> questionlist = query.List<Question>();
             return questionlist;
-        } 
+        }
+
+        public IList<Answer> SearchKeyWordInAnswers(string searchString)         
+        {
+            ICriteria query = session.CreateCriteria(typeof(Answer)).Add(Expression.Like("text", "%" + searchString + "%"));
+            IList<Answer> answerlist = query.List<Answer>();
+            return answerlist;
+        }
     }
 }
