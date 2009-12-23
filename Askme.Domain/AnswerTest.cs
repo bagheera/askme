@@ -34,7 +34,7 @@ namespace Askme.Domain
             Console.WriteLine(user.UserId);
             Answer answer = new Answer(new AskMeDate(),  user, "");
             repository.SaveAnswer(answer);
-            repository.Dispose();
+           
         }
 
 
