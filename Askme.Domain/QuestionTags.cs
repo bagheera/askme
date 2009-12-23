@@ -6,7 +6,7 @@ namespace Askme.Domain
 {
     public class QuestionTags
     {
-        private List<Tag> tags;
+        private IList<Tag> tags;
 
         public QuestionTags()
         {
