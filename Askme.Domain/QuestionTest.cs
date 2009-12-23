@@ -43,8 +43,8 @@ namespace Askme.Domain
             question.AddTags(csharpTag);
             question.AddTags(javaTag);
 
-            Assert.AreEqual(csharpTag, question.GetTags.Tags[0]);
-            Assert.AreEqual(javaTag, question.GetTags.Tags[1]);
+            Assert.AreEqual(csharpTag, question.Tags.Tags[0]);
+            Assert.AreEqual(javaTag, question.Tags.Tags[1]);
 
         }
 

@@ -15,5 +15,13 @@
         <one-to-many class="Answer" />
       </bag>
     </component>
+
+    <component name="tags" class ="Askme.Domain.QuestionTags" access="field">
+      <bag name="tags" cascade="all-delete-orphan" access="field">
+        <key column="questionId"/>
+        <one-to-many class="Tag" />
+      </bag>
+    </component>
+
   </class>
 </hibernate-mapping>

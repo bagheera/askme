@@ -9,7 +9,7 @@ namespace Askme.Domain
 
         private int Id;
         private string text;
-        private QuestionTags questionTags = new QuestionTags();
+        private QuestionTags tags = new QuestionTags();
         private Answers answers = new Answers();
 
         public Question()
@@ -33,9 +33,9 @@ namespace Askme.Domain
             get { return text; }
         }
 
-        public virtual QuestionTags GetTags
+        public virtual QuestionTags Tags
         {
-            get { return questionTags; }
+            get { return tags; }
         }
 
         public virtual AskMeDate QuestionAskedOn
@@ -55,7 +55,7 @@ namespace Askme.Domain
 
         public virtual void AddTags(Tag tag)
         {
-            this.questionTags.Add(tag);
+            tags.Add(tag);
         }
     }
 }
