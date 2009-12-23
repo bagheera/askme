@@ -5,5 +5,11 @@
       <generator class="native" />
     </id>
     <property name="tagName" column="TagName" type="string" length="120" access="field"/>
+
+    <bag name="questions" table="question_tag" cascade="all" access="field">
+      <key column="TagId"/>
+      <many-to-many column="QuestionId" class="Askme.Domain.Question" />
+    </bag>
+    
   </class>
 </hibernate-mapping>

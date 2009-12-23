@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Askme.Domain
@@ -9,7 +10,7 @@ namespace Askme.Domain
 
         private int Id;
         private string text;
-        private QuestionTags tags = new QuestionTags();
+        private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
 
         public Question()
@@ -33,7 +34,7 @@ namespace Askme.Domain
             get { return text; }
         }
 
-        public virtual QuestionTags Tags
+        public virtual IList<Tag> Tags
         {
             get { return tags; }
         }

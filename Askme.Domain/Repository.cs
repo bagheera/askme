@@ -16,22 +16,18 @@ namespace Askme.Domain
 
         private Repository()
         {
-            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), new FileInfo("Answer.hbm.xml"),
-                new FileInfo("Question.hbm.xml"), new FileInfo("Tag.hbm.xml"));
+            InitalizeSessionFactory(new FileInfo("User.hbm.xml"), 
+                new FileInfo("Answer.hbm.xml"),
+                new FileInfo("Question.hbm.xml"), 
+                new FileInfo("Tag.hbm.xml"));
             session = CreateSession();
-
-
-            
         }
 
 
         public static Repository GetInstance()
         {
             if(repositoryInstance == null)   
-            {
                 repositoryInstance = new Repository();
-               
-            }
 
             return repositoryInstance;
         }
@@ -63,6 +59,10 @@ namespace Askme.Domain
         public void Dispose()
         {
             session.Dispose();
+        }
+
+        public void	 SaveQuestion(Question question)
+        {
         }
     }
 }
