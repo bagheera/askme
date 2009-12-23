@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using NHibernate;
+using NHibernate.Criterion;
 using NUnit.Framework;
 
 namespace Askme.Domain
@@ -83,6 +84,23 @@ namespace Askme.Domain
             IQuery query = session.CreateQuery("from Answer");
             IList<Answer> answers = query.List<Answer>();
             Assert.AreEqual(1, answers.Count);
+        }
+
+        [Test]
+        public void ShouldBeAbleToSearchQuestionsBasedOnAKeyword()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            string searchString = "word";
+            Question question = new Question(questionText, UserMother.Kamal);
+        
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            IList<Question> questionsFound = repository.SearchKeyWordInQuestion(searchString);
+            
+            
+         
+            Assert.AreEqual(1,questionsFound.Count);
+
         }
     }
 }
