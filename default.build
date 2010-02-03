@@ -21,16 +21,40 @@
 			</msbuild>
         </target>
 		
-		 <target name="test" description="runs unit tests" depends="build">
+		<target name="test" description="runs unit tests" depends="build">
 			<echo message="test" />
-			<ncover program="Library\NCover\NCover.Console.exe"
+      <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /s" />      
+      <ncover program="Library\NCover\NCover.Console.exe"
                commandLineExe="Library\nunit\nunit-console.exe"
                commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
                workingDirectory="."
                logLevel="Quiet"
                excludeAttributes=""
 			   coverageFile="Coverage.xml"
-			>
-			</ncover>
+              >
+      </ncover>
+      
+      <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /u /s" />
         </target>
-</project>
+   <target name="Cruise" depends="CreateReport" />
+   <target name="CreateReport" depends="test">
+     <ncoverexplorer
+       program="Library\NCoverExplorer\NCoverExplorer.Console.exe"
+       projectName="AskMe"
+       reportType="ModuleClassSummary"
+       outputDir=".\Reports\"
+       xmlReportName="AskMeCoverage.xml"
+       htmlReportName="AskMeCoverage.html"
+       showExcluded="True"
+       satisfactoryCoverage="75" >
+       <fileset>
+         <include name="Coverage.xml" />
+       </fileset>
+       <exclusions>
+         <exclusion type="Assembly" pattern="*.Tests" />
+         <exclusion type="Namespace" pattern="*.Tests*" />
+       </exclusions>
+     </ncoverexplorer>
+   </target>
+
+ </project>
