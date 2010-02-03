@@ -12,6 +12,8 @@ namespace Askme.Domain
             get { return votes.Count; }
         }
 
+
+
         public void Add(Vote vote){
             if(HasUserVoted(vote.User))
                 throw new Exception("User has already voted");
