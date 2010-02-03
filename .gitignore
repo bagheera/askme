@@ -12,3 +12,4 @@ cruise-output
 Coverage.xml
 TestResult.xml
 *.TMP
+Reports/*
