@@ -94,6 +94,8 @@
     <Compile Include="AskMeDate.cs" />
     <Compile Include="AskMeDateTest.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="NegativeVote.cs" />
+    <Compile Include="PositiveVote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="QuestionTest.cs" />
@@ -103,6 +105,9 @@
     <Compile Include="User.cs" />
     <Compile Include="UserMother.cs" />
     <Compile Include="UserTest.cs" />
+    <Compile Include="Vote.cs" />
+    <Compile Include="Votes.cs" />
+    <Compile Include="VoteTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="User.hbm.xml">

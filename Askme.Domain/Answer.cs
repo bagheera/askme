@@ -8,7 +8,8 @@ namespace Askme.Domain
         private readonly User user;
         private readonly string text;
         private int answerId;
-
+        private Votes votes = new Votes();
+        
         public virtual int AnswerId
         {
             get { return answerId; }
@@ -33,6 +34,10 @@ namespace Askme.Domain
         public virtual AskMeDate CreatedOn
         {
             get { return createdOn; }
+        }
+
+        public Votes Votes{
+            get { return votes; }
         }
 
         public override string ToString()
@@ -64,6 +69,10 @@ namespace Askme.Domain
                 result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
                 return result;
             }
+        }
+
+        public void CastVote(Vote vote){
+            votes.Add(vote);                  
         }
     }
 }
