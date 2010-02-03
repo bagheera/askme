@@ -36,7 +36,8 @@ namespace Askme.Domain
             get { return createdOn; }
         }
 
-        public Votes Votes{
+        public virtual Votes Votes
+        {
             get { return votes; }
         }
 
@@ -71,7 +72,7 @@ namespace Askme.Domain
             }
         }
 
-        public void CastVote(Vote vote){
+        public virtual void CastVote(Vote vote){
             votes.Add(vote);                  
         }
     }
