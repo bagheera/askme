@@ -81,7 +81,69 @@ namespace Askme.Domain
             Assert.AreEqual(count + 1,questionsFound.Count);
 
         }
-
         
+        [Test]
+        public void VerifyThatAnAnswerCouldBeAccepted()
+        {
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question("What is the use of 'var' key word?", user);
+
+            question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
+
+            Answer acceptedAnswer = new Answer(new AskMeDate(), null, "second answer");
+            question.AddAnswer(acceptedAnswer);
+
+            question.AcceptSolution(acceptedAnswer);
+            
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            Answers answersFound = repository.LoadAnswersForQuestion(question);
+            
+            Assert.AreEqual(acceptedAnswer, answersFound.getAcceptedAnswer());
+        }
+        
+        [Test]
+        [ExpectedException (typeof(NotSupportedException))]
+        public void VerifyThatAnAnswerCouldNotBeAcceptedMoreThanOnce()
+        {
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question("What is the use of 'var' key word?", user);
+
+            question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
+
+            Answer acceptedAnswer = new Answer(new AskMeDate(), null, "second answer");
+            question.AddAnswer(acceptedAnswer);
+
+            question.AcceptSolution(acceptedAnswer);
+            
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            Answers answersFound = repository.LoadAnswersForQuestion(question);
+            
+            Assert.AreEqual(acceptedAnswer, answersFound.getAcceptedAnswer());
+            question.AcceptSolution(acceptedAnswer);
+            repository.SaveQuestion(question);
+
+        }
+        
+        [Test]
+        [ExpectedException (typeof(NotSupportedException))]
+        public void VerifyThatOnlyOneAnswerOfAQuestionCanBeAccepted()
+        {
+            User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Question question = new Question("What is the use of 'var' key word?", user);
+            Answer answer1 = new Answer(new AskMeDate(), null, "first answer");
+            question.AddAnswer(answer1);
+
+            Answer answer2 = new Answer(new AskMeDate(), null, "second answer");
+            question.AddAnswer(answer2);
+
+            question.AcceptSolution(answer1);
+            question.AcceptSolution(answer2);
+
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            
+        }
     }
 }

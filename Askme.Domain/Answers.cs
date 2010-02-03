@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Askme.Domain
@@ -5,6 +6,16 @@ namespace Askme.Domain
     public class Answers
     {
         private readonly IList<Answer> answers = new List<Answer>();
+
+        public Answers(){}
+
+        public Answers(IList<Answer> answers)
+        {
+            foreach (Answer answer in answers)
+            {
+                this.answers.Add(answer);
+            }
+        }
 
         public void AddAnswer(Answer answer)
         {
@@ -34,6 +45,23 @@ namespace Askme.Domain
         public override int GetHashCode()
         {
             return (answers != null ? answers.GetHashCode() : 0);
+        }
+
+        public Answer getAcceptedAnswer()
+        {
+            foreach (Answer answer in answers)
+            {
+                if(answer.IsAccepted())
+                {
+                    return answer;
+                }
+            }
+            return null;
+        }
+
+        public bool	CanBeAccepted(Answer answer)
+        {
+            answers.Contains(answer)
         }
     }
 }

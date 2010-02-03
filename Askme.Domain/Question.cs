@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ namespace Askme.Domain
         private string text;
         private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
+        private Object localLock = new object();
 
         public Question()
         {
@@ -84,6 +86,21 @@ namespace Askme.Domain
                 result = (result*397) ^ (tags != null ? tags.GetHashCode() : 0);
                 result = (result*397) ^ (answers != null ? answers.GetHashCode() : 0);
                 return result;
+            }
+        }
+
+        public virtual void AcceptSolution(Answer answer)
+        {
+            lock (localLock)
+            {
+                if (answers.CanBeAccepted(answer))
+                {
+                    answer.Accept();
+                }
+                else
+                {
+                    throw new NotSupportedException("Another answer has been already accepted");
+                }
             }
         }
     }

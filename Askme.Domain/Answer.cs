@@ -8,6 +8,8 @@ namespace Askme.Domain
         private readonly User user;
         private readonly string text;
         private int answerId;
+        private int accepted;
+        private object localLock = new object();
 
         public virtual int AnswerId
         {
@@ -23,6 +25,7 @@ namespace Askme.Domain
             this.createdOn = createdOn;
             this.user = user;
             this.text = text;
+            accepted = 0;
         }
 
         public virtual User User
@@ -35,6 +38,10 @@ namespace Askme.Domain
             get { return createdOn; }
         }
 
+        public virtual int Accepted
+        {
+            get { return accepted; }
+        }
         public override string ToString()
         {
             return text;
@@ -44,7 +51,7 @@ namespace Askme.Domain
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.createdOn, createdOn) && Equals(other.user, user) && Equals(other.text, text);
+            return Equals(other.createdOn, createdOn) && Equals(other.user, user) && Equals(other.text, text) && other.answerId == answerId && other.accepted == accepted;
         }
 
         public override bool Equals(object obj)
@@ -62,8 +69,29 @@ namespace Askme.Domain
                 int result = (createdOn != null ? createdOn.GetHashCode() : 0);
                 result = (result*397) ^ (user != null ? user.GetHashCode() : 0);
                 result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
+                result = (result*397) ^ answerId;
+                result = (result*397) ^ accepted;
                 return result;
             }
+        }
+
+        public virtual void Accept(){
+            lock (localLock)
+            {
+                if (accepted == 0)
+                {
+                    accepted = 1;
+                }
+                else
+                {
+                    throw new NotSupportedException("An answer cannot be accepted more than once");
+                }
+            }
+        }
+
+        public virtual bool IsAccepted()
+        {
+            return accepted == 0 ? false : true;
         }
     }
 }

@@ -79,6 +79,10 @@ namespace Askme.Domain
         {
             return session.CreateQuery("from Answer where questionId = " + question.QuestionId).List<Answer>();
         }
+        public Answers LoadAnswersForQuestion(Question question)
+        {
+            return new Answers(session.CreateQuery("from Answer where questionId = " + question.QuestionId).List<Answer>());
+        }
 
         private bool Save<T>(T t)
         {

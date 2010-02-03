@@ -23,7 +23,7 @@
 		
 		 <target name="test" description="runs unit tests" depends="build">
 			<echo message="test" />
-			<ncover program="Library\NCover\NCover.Console.exe"
+			<!--<ncover program="Library\NCover\NCover.Console.exe"
                commandLineExe="Library\nunit\nunit-console.exe"
                commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
                workingDirectory="."
@@ -31,6 +31,6 @@
                excludeAttributes=""
 			   coverageFile="Coverage.xml"
 			>
-			</ncover>
+			</ncover>-->
         </target>
 </project>

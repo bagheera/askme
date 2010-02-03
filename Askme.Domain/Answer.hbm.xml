@@ -9,5 +9,6 @@
     </component>
     <many-to-one name="user" access="field" class="User" column="userId" cascade="none"/>
     <property name="text" column="Text" type="string" access="field"/>
+    <property name="accepted" column="accepted" type="integer" access="field"/>
   </class>
 </hibernate-mapping>
