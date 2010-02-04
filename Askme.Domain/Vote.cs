@@ -2,23 +2,33 @@
 
 namespace Askme.Domain
 {
-    public abstract class  Vote
+    public class  Vote
     {
-        private readonly User _user;
-
-        public Vote(User user){
-            _user = user;
-        }
-
-        protected Vote(){
-            throw new NotImplementedException();
-        }
-
-        public User User{
-            get { return _user;}
-        }
-
-        public abstract int Value{ get; }
+        private readonly User user;
+        private readonly int voteId;
+        protected readonly int value;
         
+        protected Vote(User user, int value){
+            this.user = user;
+            this.value = value;
+        }
+       
+        public Vote(){
+            
+        }
+
+        public virtual int VoteId
+        {
+            get { return voteId; }
+        }
+
+        public virtual User User
+        {
+            get { return user; }
+        }
+
+        public virtual int Value{
+            get { return value;}
+        }
     }
 }

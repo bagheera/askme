@@ -4,12 +4,8 @@ namespace Askme.Domain
 {
     public class NegativeVote : Vote
     {
-        public NegativeVote(User user) : base(user){
+        public NegativeVote(User user) : base(user, -1){
             
-        }
-
-        public override int Value{
-            get { return -1; }
         }
     }
 }

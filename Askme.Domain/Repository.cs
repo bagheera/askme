@@ -18,8 +18,9 @@ namespace Askme.Domain
         {
             InitalizeSessionFactory(new FileInfo("User.hbm.xml"), 
                 new FileInfo("Answer.hbm.xml"),
-                new FileInfo("Question.hbm.xml"), 
-                new FileInfo("Tag.hbm.xml"));
+                new FileInfo("Question.hbm.xml"),
+                new FileInfo("Tag.hbm.xml"),
+                new FileInfo("Vote.hbm.xml"));
             session = CreateSession();
         }
 
@@ -99,6 +100,11 @@ namespace Askme.Domain
             ICriteria query = session.CreateCriteria(typeof(Answer)).Add(Expression.Like("text", "%" + searchString + "%"));
             IList<Answer> answerlist = query.List<Answer>();
             return answerlist;
+        }
+
+        internal bool Evict<T>(T t){
+            session.Evict(t);
+            return true;
         }
     }
 }

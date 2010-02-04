@@ -13,3 +13,6 @@ Coverage.xml
 TestResult.xml
 *.TMP
 Reports/*
+Askme.5.0.resharper
+sqlite3.dll
+

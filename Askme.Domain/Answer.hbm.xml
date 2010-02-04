@@ -10,9 +10,9 @@
     <many-to-one name="user" access="field" class="User" column="userId" cascade="none"/>
     <property name="text" column="Text" type="string" access="field"/>
     <component name="votes" class ="Askme.Domain.Votes" access="field">
-      <bag name="vote" cascade="all-delete-orphan" access="field">
+      <bag name="votes" cascade="all-delete-orphan" access="field">
         <key column="answerId"/>
-        <one-to-many class="Vote" />
+        <one-to-many class="Askme.Domain.Vote" />
       </bag>
     </component>
   </class>

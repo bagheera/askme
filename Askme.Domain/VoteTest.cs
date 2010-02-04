@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 namespace Askme.Domain
 {
@@ -88,27 +89,27 @@ namespace Askme.Domain
 
 
         [Test]
-        public void MultipleUsersShouldBeAbleToVoteAnAnswer()
+        public void ShouldBeAbleToSaveAndRetrieveVotesInAnswer()
         {
-            User userWhoAnswered = new User("Answerer", "123", "b@c.com");
-            Answer answer = new Answer(new AskMeDate(), userWhoAnswered, "Dummy answer");
+            User user = UserMother.Kamal;
 
-            User user1 = new User("user1", "123", "a@b.com");
-            Vote vote1 = new PositiveVote(user1);
-            User user2 = new User("user2", "123", "c@b.com");
-            Vote vote2 = new NegativeVote(user2);
+            Answer answer = new Answer(new AskMeDate(), user, "answer to be voted");
+            Repository repository = Repository.GetInstance();
+            repository.SaveUser(user);
 
-            answer.CastVote(vote1);
-            answer.CastVote(vote2);
 
-            Assert.AreEqual(2, answer.Votes.Count);
+            Vote vote = new NegativeVote(user);
+            answer.CastVote(vote);
+            repository.SaveAnswer(answer);
+
+            repository.Evict(answer);
+
+            string searchString = "answer to be voted";
+            IList<Answer> answersFound = repository.SearchKeyWordInAnswers(searchString);
+
+            Assert.AreEqual(1, answersFound.Count);
+            Assert.AreEqual(1, answersFound[0].Votes.Count);
+
         }
-
-
-
-
-
-
-        
     }
 }

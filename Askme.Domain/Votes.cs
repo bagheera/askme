@@ -5,7 +5,7 @@ namespace Askme.Domain
 {
     public class Votes
     {
-        List<Vote> votes = new List<Vote>();
+        private readonly IList<Vote> votes = new List<Vote>();
 
 
         public int Count{
@@ -21,7 +21,7 @@ namespace Askme.Domain
         }
 
         public bool HasUserVoted(User user){
-            int count = votes.FindAll(e => e.User.Equals(user)).Count;
+            int count = ((List<Vote>)votes).FindAll(e => e.User.Equals(user)).Count;
             return count == 1;
         }
     }

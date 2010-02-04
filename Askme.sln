@@ -5,6 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askme.Domain", "Askme.Domai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{202AB715-4787-46AF-BDCC-99B26E575F47}"
 	ProjectSection(SolutionItems) = preProject
+		default.build = default.build
 		Library\nhibernate-configuration.xsd = Library\nhibernate-configuration.xsd
 		Library\nhibernate-mapping.xsd = Library\nhibernate-mapping.xsd
 		schema.sql = schema.sql
