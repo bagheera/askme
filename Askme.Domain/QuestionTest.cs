@@ -21,6 +21,33 @@ namespace Askme.Domain
         }
 
         [Test]
+        public void NonOwnersShouldBeAbleToCastVote()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            User owner = new User("shanu","shanu","shanu@shanu.com");
+            User user = new User("user","user","shanu@shanu.com");
+            Question question = new Question(questionText,owner);
+
+            Assert.AreEqual(questionText, question.QuestionText);
+
+            question.CastVote(new PositiveVote(user));
+            Assert.AreEqual(1,question.GetVotes().Count);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidDataException))]
+        public void QuestionOwnerShouldNotBeAbleToCastVote()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            User owner = new User("shanu","shanu","shanu@shanu.com");
+            Question question = new Question(questionText,owner);
+
+            Assert.AreEqual(questionText, question.QuestionText);
+
+            question.CastVote(new PositiveVote(owner));
+        }
+
+        [Test]
         public void ShouldBeAbleToCreateQuestionWithTag()
         {
             string questionText = "What is the use of 'var' key word?";
