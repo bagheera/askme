@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,7 +13,9 @@ namespace Askme.Domain
         private string text;
         private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
-
+        private Object localLock = new object();
+        private Answer acceptedAnswer;
+        
         public Question()
         {
         }
@@ -22,6 +25,12 @@ namespace Askme.Domain
             this.text = text;
             this.user = user;
             askedOn = new AskMeDate();
+        }
+
+        public virtual Answer AcceptedAnswer
+        {
+            get { return acceptedAnswer; }
+            set { acceptedAnswer = value; }
         }
 
         public virtual int QuestionId
@@ -59,6 +68,7 @@ namespace Askme.Domain
             tags.Add(tag);
         }
 
+
         public virtual bool Equals(Question other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -84,6 +94,21 @@ namespace Askme.Domain
                 result = (result*397) ^ (tags != null ? tags.GetHashCode() : 0);
                 result = (result*397) ^ (answers != null ? answers.GetHashCode() : 0);
                 return result;
+            }
+        }
+
+        public virtual void AcceptSolution(Answer answer)
+        {
+            lock (localLock)
+            {
+                if (acceptedAnswer == null)
+                {
+                    acceptedAnswer = answer;
+                }
+                else
+                {
+                    throw new NotSupportedException("An answer has been already accepted");
+                }
             }
         }
     }

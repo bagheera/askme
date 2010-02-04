@@ -10,6 +10,8 @@ namespace Askme.Domain
         private int answerId;
         private Votes votes = new Votes();
         
+        private object localLock = new object();
+
         public virtual int AnswerId
         {
             get { return answerId; }
@@ -50,7 +52,7 @@ namespace Askme.Domain
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.createdOn, createdOn) && Equals(other.user, user) && Equals(other.text, text);
+            return Equals(other.createdOn, createdOn) && Equals(other.user, user) && Equals(other.text, text) && other.answerId == answerId && Equals(other.localLock, localLock);
         }
 
         public override bool Equals(object obj)
@@ -68,6 +70,8 @@ namespace Askme.Domain
                 int result = (createdOn != null ? createdOn.GetHashCode() : 0);
                 result = (result*397) ^ (user != null ? user.GetHashCode() : 0);
                 result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
+                result = (result*397) ^ answerId;
+                result = (result*397) ^ (localLock != null ? localLock.GetHashCode() : 0);
                 return result;
             }
         }

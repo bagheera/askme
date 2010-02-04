@@ -21,5 +21,9 @@
       <key column="QuestionId"/>
       <many-to-many column="TagId" class="Askme.Domain.Tag" />
     </bag>
+
+    <many-to-one name="AcceptedAnswer" class="Askme.Domain.Answer" column="accepted_answer_id" 
+                 not-null="true" cascade="all" unique="true"/>
+    
   </class>
 </hibernate-mapping>

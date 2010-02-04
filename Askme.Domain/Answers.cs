@@ -1,10 +1,23 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Askme.Domain
 {
     public class Answers
     {
         private readonly IList<Answer> answers = new List<Answer>();
+
+        public Answers(){}
+
+        public Answers(IList<Answer> answers)
+        {
+            foreach (Answer answer in answers)
+            {
+                this.answers.Add(answer);
+            }
+        }
 
         public void AddAnswer(Answer answer)
         {

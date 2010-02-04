@@ -48,6 +48,36 @@ namespace Askme.Domain
             mock.Setup(ps => ps.SaveUser(user)).Throws(new Exception("User could not be saved")).AtMostOnce();
             user.Register(mock.Object);
         }
-        
+
+        [Test]
+        public void TestOwnerCanAcceptAnAnswerForAQuestionRaisedByHim()
+        {
+            User user = new User("ShilpaG", "test123", "shilpa@foo.com");
+            
+            Question question = new Question("What is the use of 'var' key word?", user);
+            Answer answer1 = new Answer(new AskMeDate(), null, "first answer");
+            question.AddAnswer(answer1);
+            user.AddQuestion(question);
+            user.AcceptSolution(question, answer1);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+
+
+        }
+        [Test]
+        [ExpectedException (typeof(NotSupportedException))]
+        public void TestOnlyOwnerCanAcceptAnAnswerForAQuestionRaisedByHim()
+        {
+            User user = new User("ShilpaG", "test123", "shilpa@foo.com");
+            User userOtherThanOwner = new User("Arun", "arun", "arun@foo.com");
+            Question question = new Question("What is the use of 'var' key word?", user);
+            Answer answer1 = new Answer(new AskMeDate(), null, "first answer");
+            question.AddAnswer(answer1);
+            user.AddQuestion(question);
+            userOtherThanOwner.AcceptSolution(question, answer1);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+        }
+      
     }
 }
