@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Askme.Domain
 {
@@ -45,23 +47,6 @@ namespace Askme.Domain
         public override int GetHashCode()
         {
             return (answers != null ? answers.GetHashCode() : 0);
-        }
-
-        public Answer getAcceptedAnswer()
-        {
-            foreach (Answer answer in answers)
-            {
-                if(answer.IsAccepted())
-                {
-                    return answer;
-                }
-            }
-            return null;
-        }
-
-        public bool	CanBeAccepted(Answer answer)
-        {
-            answers.Contains(answer)
         }
     }
 }

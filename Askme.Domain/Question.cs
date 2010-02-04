@@ -14,7 +14,8 @@ namespace Askme.Domain
         private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
         private Object localLock = new object();
-
+        private Answer acceptedAnswer;
+        
         public Question()
         {
         }
@@ -24,6 +25,12 @@ namespace Askme.Domain
             this.text = text;
             this.user = user;
             askedOn = new AskMeDate();
+        }
+
+        public virtual Answer AcceptedAnswer
+        {
+            get { return acceptedAnswer; }
+            set { acceptedAnswer = value; }
         }
 
         public virtual int QuestionId
@@ -61,6 +68,7 @@ namespace Askme.Domain
             tags.Add(tag);
         }
 
+
         public virtual bool Equals(Question other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -93,13 +101,13 @@ namespace Askme.Domain
         {
             lock (localLock)
             {
-                if (answers.CanBeAccepted(answer))
+                if (acceptedAnswer == null)
                 {
-                    answer.Accept();
+                    acceptedAnswer = answer;
                 }
                 else
                 {
-                    throw new NotSupportedException("Another answer has been already accepted");
+                    throw new NotSupportedException("An answer has been already accepted");
                 }
             }
         }
