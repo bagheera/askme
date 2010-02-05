@@ -96,8 +96,6 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
-    <Compile Include="Forum.cs" />
-    <Compile Include="FourmTest.cs" />
     <Compile Include="QuestionTest.cs" />
     <Compile Include="NHibernateInMemoryBase.cs" />
     <Compile Include="Repository.cs" />

@@ -7,13 +7,5 @@
     <property name="Username" column="Username" type="String" length="120"/>
     <property name="EmailId" column="EmailId" type="String" length="120"/>
     <property name="Password" column="Password" type="String" length="120"/>
-
-    <component name="forum" class ="Askme.Domain.Forum" access="field">
-      <bag name="questions" cascade="all-delete-orphan" access="field">
-        <key column="accepted_answer_id"/>
-        <one-to-many class="Question" />
-      </bag>
-    </component>
-    
   </class>
 </hibernate-mapping>
