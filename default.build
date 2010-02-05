@@ -1,65 +1,63 @@
 <?xml version="1.0"?>
- <project name="Askme" default="test" basedir=".">
-        <description>Askme</description>
+<project name="Askme" default="test" basedir=".">
+  <description>Askme</description>
 
-		<target name="clean">
-			<echo message="clean" />
-			<delete>
-				<fileset basedir=".">
-					<include name="**/bin/debug/*"/>
-					<include name="**/obj/*"/>
-					<include name="**/obj/debug/*"/>
-				</fileset>
-			</delete>
-		</target>
+  <target name="clean">
+    <echo message="clean" />
+    <delete>
+      <fileset basedir=".">
+        <include name="**/bin/debug/*"/>
+        <include name="**/obj/*"/>
+        <include name="**/obj/debug/*"/>
+      </fileset>
+    </delete>
+  </target>
 
-        <target name="build" description="compiles the source code" depends="clean">
-			<echo message="compile" />
-			<msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
-				<property name="Configuration" value="Debug"/>
-				<property name="WarningLevel" value="0"/>
-			</msbuild>
-        </target>
-		
-		<target name="test" description="runs unit tests" depends="build">
-			<echo message="test" />
+  <target name="build" description="compiles the source code" depends="clean">
+    <echo message="compile" />
+    <msbuild verbosity="Quiet" project="Askme.sln" target="Build" >
+      <property name="Configuration" value="Debug"/>
+      <property name="WarningLevel" value="0"/>
+    </msbuild>
+  </target>
 
-      <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /s" />      
-      <ncover program="Library\NCover\NCover.Console.exe"
+  <target name="test" description="runs unit tests" depends="build">
+    <echo message="test" />
 
-			<ncover program="Library\NCover\NCover.Console.exe"
+    <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /s" />
+    <ncover program="Library\NCover\NCover.Console.exe"
 
-               commandLineExe="Library\nunit\nunit-console.exe"
-               commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
-               workingDirectory="."
-               logLevel="Quiet"
-               excludeAttributes=""
-			   coverageFile="Coverage.xml"
+             commandLineExe="Library\nunit\nunit-console.exe"
+             commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
+             workingDirectory="."
+             logLevel="Quiet"
+             excludeAttributes=""
+       coverageFile="Coverage.xml"
 
               >
-      </ncover>
-      
-      <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /u /s" />
-        </target>
-   <target name="Cruise" depends="CreateReport" />
-   <target name="CreateReport" depends="test">
-     <ncoverexplorer
-       program="Library\NCoverExplorer\NCoverExplorer.Console.exe"
-       projectName="AskMe"
-       reportType="ModuleClassSummary"
-       outputDir=".\Reports\"
-       xmlReportName="AskMeCoverage.xml"
-       htmlReportName="AskMeCoverage.html"
-       showExcluded="True"
-       satisfactoryCoverage="80" >
-       <fileset>
-         <include name="Coverage.xml" />
-       </fileset>
-       <exclusions>
-         <exclusion type="Assembly" pattern="*.Tests" />
-         <exclusion type="Namespace" pattern="*.Tests*" />
-       </exclusions>
-     </ncoverexplorer>
-   </target>
+    </ncover>
 
- </project>
+    <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /u /s" />
+  </target>
+  <target name="Cruise" depends="CreateReport" />
+  <target name="CreateReport" depends="test">
+    <ncoverexplorer
+      program="Library\NCoverExplorer\NCoverExplorer.Console.exe"
+      projectName="AskMe"
+      reportType="ModuleClassSummary"
+      outputDir=".\Reports\"
+      xmlReportName="AskMeCoverage.xml"
+      htmlReportName="AskMeCoverage.html"
+      showExcluded="True"
+      satisfactoryCoverage="80" >
+      <fileset>
+        <include name="Coverage.xml" />
+      </fileset>
+      <exclusions>
+        <exclusion type="Assembly" pattern="*.Tests" />
+        <exclusion type="Namespace" pattern="*.Tests*" />
+      </exclusions>
+    </ncoverexplorer>
+  </target>
+
+</project>
