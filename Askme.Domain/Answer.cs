@@ -52,7 +52,10 @@ namespace Askme.Domain
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.createdOn, createdOn) && Equals(other.user, user) && Equals(other.text, text) && other.answerId == answerId && Equals(other.localLock, localLock);
+            return Equals(other.createdOn, createdOn)
+                && Equals(other.user, user)
+                && Equals(other.text, text)
+                && other.answerId == answerId;
         }
 
         public override bool Equals(object obj)

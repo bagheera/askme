@@ -145,27 +145,42 @@ namespace Askme.Domain
             repository.SaveQuestion(question);
             
         }
+        
+        [Test]
+        public void OwnerCanAcceptAnAnswerForAQuestionRaisedByHim()
+        {
+            User user = new User("ShilpaG", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", user);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            repository.SaveUser(user);
+
+
+            Answer answer1 = new Answer(new AskMeDate(), user, "first answer");
+            repository.SaveAnswer(answer1);
+
+            question.AddAnswer(answer1);
+
+            user.AcceptAnswer(question, answer1);
+            
+        }
+
 
         [Test]
         [ExpectedException(typeof(NotSupportedException))]
-        public void VerifyThatOnlyTheOwnerOfTheQuestionCanAcceptTheAnswer()
+        public void TestOnlyOwnerCanAcceptAnAnswerForAQuestionRaisedByHim()
         {
-            User owner = new User("shanu", "shanu", "shanu@shanu.com");
-            Question question = new Question("What is the use of 'var' key word?", owner);
+            User user = new User("ShilpaG", "test123", "shilpa@foo.com");
+            User userOtherThanOwner = new User("Arun", "arun", "arun@foo.com");
+            Question question = new Question("What is the use of 'var' key word?", user);
             Answer answer1 = new Answer(new AskMeDate(), null, "first answer");
             question.AddAnswer(answer1);
 
-            Answer answer2 = new Answer(new AskMeDate(), null, "second answer");
-            question.AddAnswer(answer2);
-
-            User userWhoIsNotOwner = new User("shanu", "shanu", "shanu@shanu.com");
-
-            question.AcceptSolution(answer1);
-            question.AcceptSolution(answer2);
-
+            userOtherThanOwner.AcceptAnswer(question, answer1);
             Repository repository = Repository.GetInstance();
             repository.SaveQuestion(question);
-
         }
+      
     }
 }

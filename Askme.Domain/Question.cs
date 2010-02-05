@@ -110,6 +110,10 @@ namespace Askme.Domain
                     throw new NotSupportedException("An answer has been already accepted");
                 }
             }
+        }
+        public virtual bool	 IsOwner(User asker)
+        {
+            return user.Equals(asker);
         }
     }
 }

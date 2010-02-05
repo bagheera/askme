@@ -8,7 +8,6 @@ namespace Askme.Domain
         private string emailId;
         private string password;
         private int userId;
-        private Forum forum = new Forum();
 
         public User(string username, string password, string emailId)
         {
@@ -45,16 +44,6 @@ namespace Askme.Domain
             set { userId = value; }
         }
 
-        public virtual void AddQuestion(Question question)
-        {
-            forum.AddQuestion(question);
-        }
-
-        public virtual int NumberOfQuestion
-        {
-            get { return forum.Count; }
-        }
-
         public virtual bool Register(IRepository repository)
         {
             bool userRegistered = false;
@@ -72,23 +61,19 @@ namespace Askme.Domain
             return userRegistered;
         }
 
-        public virtual void AcceptSolution(Question question,Answer answer)
+        public virtual void AcceptAnswer(Question question,Answer answer)
         {
-            if (forum.HasQuestion(question))
-            {
-                question.AcceptSolution(answer);    
-            }
-            else
-            {
-                throw new NotSupportedException("An answer can be accepted only by the question's owner");    
-            }
+            
+            if (!question.IsOwner(this))
+                throw new NotSupportedException("An answer can be accepted only by the question's owner");
+            question.AcceptSolution(answer);   
         }
 
         public virtual bool Equals(User other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.username, username) && Equals(other.emailId, emailId) && Equals(other.password, password) && other.userId == userId && Equals(other.forum, forum);
+            return Equals(other.username, username) && Equals(other.emailId, emailId) && Equals(other.password, password) && other.userId == userId;
         }
 
         public override bool Equals(object obj)
@@ -107,7 +92,6 @@ namespace Askme.Domain
                 result = (result*397) ^ (emailId != null ? emailId.GetHashCode() : 0);
                 result = (result*397) ^ (password != null ? password.GetHashCode() : 0);
                 result = (result*397) ^ userId;
-                result = (result*397) ^ (forum != null ? forum.GetHashCode() : 0);
                 return result;
             }
         }
