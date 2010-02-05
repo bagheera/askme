@@ -27,7 +27,7 @@
       <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /s" />      
       <ncover program="Library\NCover\NCover.Console.exe"
 
-			<!--<ncover program="Library\NCover\NCover.Console.exe"
+			<ncover program="Library\NCover\NCover.Console.exe"
 
                commandLineExe="Library\nunit\nunit-console.exe"
                commandLineArgs=".\Askme.Domain\bin\Debug\Askme.Domain.dll /labels /nologo"
@@ -40,10 +40,6 @@
       </ncover>
       
       <exec program="regsvr32" commandline=".\Library\NCover\CoverLib.dll /u /s" />
-
-			>
-			</ncover>-->
-
         </target>
    <target name="Cruise" depends="CreateReport" />
    <target name="CreateReport" depends="test">
