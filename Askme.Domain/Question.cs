@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Askme.Domain
 {
@@ -13,9 +14,12 @@ namespace Askme.Domain
         private string text;
         private IList<Tag> tags = new List<Tag>();
         private Answers answers = new Answers();
+
         private Object localLock = new object();
         private Answer acceptedAnswer;
         
+        private Votes votes = new Votes();
+
         public Question()
         {
         }
@@ -63,6 +67,11 @@ namespace Askme.Domain
             get { return answers.Count; }
         }
 
+        public virtual Votes GetVotes()
+        {
+            return votes;
+        }
+
         public virtual void AddTags(Tag tag)
         {
             tags.Add(tag);
@@ -73,7 +82,8 @@ namespace Askme.Domain
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.askedOn, askedOn) && Equals(other.user, user) && Equals(other.text, text) && Equals(other.tags, tags) && Equals(other.answers, answers);
+            return Equals(other.askedOn, askedOn) && Equals(other.user, user) && Equals(other.text, text) &&
+                   Equals(other.tags, tags) && Equals(other.answers, answers);
         }
 
         public override bool Equals(object obj)
@@ -97,6 +107,7 @@ namespace Askme.Domain
             }
         }
 
+
         public virtual void AcceptSolution(Answer answer)
         {
             lock (localLock)
@@ -114,6 +125,15 @@ namespace Askme.Domain
         public virtual bool	 IsOwner(User asker)
         {
             return user.Equals(asker);
+        }
+
+        public virtual void CastVote(Vote vote)
+        {
+            if(vote.User.Equals(user))
+            {
+                throw new Exception	("Owner Cannot vote");
+            }
+            votes.Add(vote);
         }
     }
 }

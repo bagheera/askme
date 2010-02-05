@@ -55,7 +55,7 @@
        xmlReportName="AskMeCoverage.xml"
        htmlReportName="AskMeCoverage.html"
        showExcluded="True"
-       satisfactoryCoverage="75" >
+       satisfactoryCoverage="80" >
        <fileset>
          <include name="Coverage.xml" />
        </fileset>
