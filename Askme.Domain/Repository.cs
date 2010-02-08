@@ -40,6 +40,7 @@ namespace Askme.Domain
 
         public bool SaveAnswer(Answer answer)
         {
+
             return Save(answer);
         }
 
@@ -84,7 +85,6 @@ namespace Askme.Domain
         {
             return new Answers(session.CreateQuery("from Answer where questionId = " + question.QuestionId).List<Answer>());
         }
-
         private bool Save<T>(T t)
         {
             session.Save(t);

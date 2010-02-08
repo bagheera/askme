@@ -2,8 +2,6 @@
 {
     public class AnswerVote:Vote
     {
-        private Answer _answer;
-
         protected AnswerVote(){}
         private AnswerVote(User user, int value) : base(user, value)
         {

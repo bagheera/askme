@@ -89,7 +89,6 @@ namespace Askme.Domain
 
 
         [Test]
-        [Ignore]
         public void ShouldBeAbleToSaveAndRetrieveVotesInAnswer()
         {
             User user = UserMother.Kamal;
