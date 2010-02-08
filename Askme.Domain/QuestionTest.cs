@@ -31,7 +31,7 @@ namespace Askme.Domain
             Assert.AreEqual(questionText, question.QuestionText);
 
             question.CastVote(QuestionVote.PositiveVote(user));
-            Assert.AreEqual(1,question.GetVotes().Count);
+            Assert.AreEqual(1,question.GetVotes().GetTotalVotes());
         }
 
         [Test]
@@ -45,6 +45,40 @@ namespace Askme.Domain
             Assert.AreEqual(questionText, question.QuestionText);
 
             question.CastVote(QuestionVote.PositiveVote(owner));
+        }
+
+        [Test]
+        public void ValidateCountOfVotesCasted()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            User owner = new User("shanu", "shanu", "shanu@shanu.com");
+            User user1 = new User("user", "user", "shanu@shanu.com");
+            User user2 = new User("user2", "user", "shanu@shanu.com");
+            User user3 = new User("user3", "user", "shanu@shanu.com");
+            Question question = new Question(questionText, owner);
+
+            Assert.AreEqual(questionText, question.QuestionText);
+
+            question.CastVote(QuestionVote.PositiveVote(user1));
+            question.CastVote(QuestionVote.PositiveVote(user2));
+            question.CastVote(QuestionVote.NegativeVote(user3));
+            Assert.AreEqual(1, question.GetVotes().GetTotalVotes());
+        }
+
+        [Test]
+        [ExpectedException(typeof(Exception))]
+        public void ValidateIfSameUserCannotVoteMoreThanOnceForAQuestion()
+        {
+            string questionText = "What is the use of 'var' key word?";
+            User owner = new User("shanu", "shanu", "shanu@shanu.com");
+            User user1 = new User("user", "user", "shanu@shanu.com");
+            Question question = new Question(questionText, owner);
+
+            Assert.AreEqual(questionText, question.QuestionText);
+
+            question.CastVote(QuestionVote.PositiveVote(user1));
+            question.CastVote(QuestionVote.PositiveVote(user1));
+            Assert.AreEqual(1, question.GetVotes().GetTotalVotes());
         }
 
         [Test]

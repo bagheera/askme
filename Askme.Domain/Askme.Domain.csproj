@@ -97,8 +97,6 @@
     <Compile Include="AskMeDate.cs" />
     <Compile Include="AskMeDateTest.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="NegativeVote.cs" />
-    <Compile Include="PositiveVote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="QuestionTest.cs" />
