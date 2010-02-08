@@ -9,6 +9,7 @@ namespace Askme.Domain
         private readonly string text;
         private int answerId;
         private Votes votes = new Votes();
+        private object locableObject = new object();
 
         private object localLock = new object();
 
@@ -81,7 +82,11 @@ namespace Askme.Domain
 
         public virtual void CastVote(AnswerVote vote)
         {
-            votes.Add(vote);
+            lock (locableObject)
+            {
+                votes.Add(vote);
+                vote.AddPoint(user);
+            }
         }
 
         public virtual void AddPoint(User user)

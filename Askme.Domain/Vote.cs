@@ -2,6 +2,8 @@
 {
     public abstract class Vote
     {
+        protected const int NegativeValue = -1;
+        protected const int PositiveValue = 1;
         protected Vote()
         {
         }
@@ -29,6 +31,14 @@
         public virtual int Value
         {
             get { return value; }
+        }
+
+        public virtual void AddPoint(User pointableUser)
+        {
+            if (value == NegativeValue)
+                pointableUser.AddPoint(-1);
+            else if (value == PositiveValue)
+                pointableUser.AddPoint(10);
         }
     }
 }

@@ -330,6 +330,18 @@ namespace Askme.Domain
             Assert.AreEqual(10, questioner.Points());
         }
 
+        [Test]
+        public void QuestionerShouldGetMinusOnePointOnReceivingNegativeVote()
+        {
+            User questioner = new User("ShilpaG", "test123", "shilpa@foo.com");
+            User negativeVoteUser = new User("Ajith", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", questioner);
+
+            question.CastVote(QuestionVote.NegativeVote(negativeVoteUser));
+            Assert.AreEqual(-1, questioner.Points());
+        }
+
       
     }
 }

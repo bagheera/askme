@@ -11,14 +11,14 @@ namespace Askme.Domain
 
         public static QuestionVote PositiveVote(User user)
         {
-            var vote = new QuestionVote(user, 1);
+            var vote = new QuestionVote(user, PositiveValue);
             return vote;
         }
 
         public static QuestionVote NegativeVote(User user)
         {
-            var vote = new QuestionVote(user, -1);
+            var vote = new QuestionVote(user, NegativeValue);
             return vote;
         }
-   }
+    }
 }

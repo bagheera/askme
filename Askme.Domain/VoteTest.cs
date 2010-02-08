@@ -26,6 +26,30 @@ namespace Askme.Domain
         }
 
         [Test]
+        public void AnswererShouldGetTenPointsOnReceivingPositiveVote()
+        {
+            User user = new User("user1", "123", "a@b.com");
+            AnswerVote vote = AnswerVote.PositiveVote(user);
+
+            User userWhoAnswered = new User("Answerer", "123", "b@c.com");
+            Answer answer = new Answer(new AskMeDate(), userWhoAnswered, "Dummy answer" );
+            answer.CastVote(vote);
+            Assert.AreEqual(10, userWhoAnswered.Points());
+        }
+
+        [Test]
+        public void AnswererShouldGetMinusOnePointOnReceivingNegativeVote()
+        {
+            User user = new User("user1", "123", "a@b.com");
+            AnswerVote vote = AnswerVote.NegativeVote(user);
+
+            User userWhoAnswered = new User("Answerer", "123", "b@c.com");
+            Answer answer = new Answer(new AskMeDate(), userWhoAnswered, "Dummy answer" );
+            answer.CastVote(vote);
+            Assert.AreEqual(-1, userWhoAnswered.Points());
+        }
+
+        [Test]
         public void AnswerShouldReturnNumberOfVotes()
         {
             User user = new User("user1", "123", "a@b.com");

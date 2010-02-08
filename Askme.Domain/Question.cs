@@ -19,6 +19,7 @@ namespace Askme.Domain
         private Answer acceptedAnswer;
         
         private Votes votes = new Votes();
+        private object locableObject = new object();
 
         public Question()
         {
@@ -135,11 +136,14 @@ namespace Askme.Domain
 
         public virtual void CastVote(QuestionVote vote)
         {
-            if(vote.User.Equals(user))
+            lock (locableObject)
             {
-                throw new Exception	("Owner Cannot vote");
+                if (vote.User.Equals(user))
+                    throw new Exception("Owner Cannot vote");
+                votes.Add(vote);
+                vote.AddPoint(user);
             }
-            votes.Add(vote);
+
         }
     }
 }

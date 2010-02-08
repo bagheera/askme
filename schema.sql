@@ -15,4 +15,3 @@ create table vote (vote_id int, user_id int, Value int);
 create table answer_vote(vote_id int, answer_id int, constraint answer_vote_fk foreign key (vote_id) references vote(vote_id));
 create table question_vote(vote_id int, question_id int, constraint question_vote_fk foreign key (vote_id) references vote(vote_id));
 COMMIT;
-
