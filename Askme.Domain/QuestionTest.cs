@@ -30,7 +30,7 @@ namespace Askme.Domain
 
             Assert.AreEqual(questionText, question.QuestionText);
 
-            question.CastVote(new PositiveVote(user));
+            question.CastVote(QuestionVote.PositiveVote(user));
             Assert.AreEqual(1,question.GetVotes().Count);
         }
 
@@ -44,7 +44,7 @@ namespace Askme.Domain
 
             Assert.AreEqual(questionText, question.QuestionText);
 
-            question.CastVote(new PositiveVote(owner));
+            question.CastVote(QuestionVote.PositiveVote(owner));
         }
 
         [Test]

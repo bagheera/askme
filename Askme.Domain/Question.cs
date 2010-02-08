@@ -107,7 +107,6 @@ namespace Askme.Domain
             }
         }
 
-
         public virtual void AcceptSolution(Answer answer)
         {
             lock (localLock)
@@ -134,7 +133,7 @@ namespace Askme.Domain
             return user.Equals(asker);
         }
 
-        public virtual void CastVote(Vote vote)
+        public virtual void CastVote(QuestionVote vote)
         {
             if(vote.User.Equals(user))
             {

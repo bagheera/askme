@@ -11,8 +11,7 @@ namespace Askme.Domain
         public int Count{
             get { return votes.Count; }
         }
-
-
+        
 
         public void Add(Vote vote){
             if(HasUserVoted(vote.User))

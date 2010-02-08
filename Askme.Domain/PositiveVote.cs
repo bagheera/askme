@@ -2,9 +2,9 @@
 
 namespace Askme.Domain
 {
-    public class PositiveVote : Vote
+    /*public class PositiveVote : AnswerVote
     {
         public PositiveVote(User user):base(user, 1){
         }
-    }
+    }*/
 }

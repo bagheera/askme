@@ -1,10 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="Askme.Domain" namespace="Askme.Domain">
-  <class name="Askme.Domain.Vote" table="Vote">
-    <id name="voteId" access="field" column="voteId" type="int">
+  <class name="Askme.Domain.Vote">
+    <id name="voteId" access="field" column="vote_id" type="int">
       <generator class="increment" />
     </id>
-    <many-to-one name="user" access="field" class="User" column="userId" cascade="none"/>
+    <many-to-one name="user" access="field" class="User" column="user_id" cascade="none"/>
+    <property name="value" column="Value" type="int" access="field"/>
+  
+    <union-subclass name="Askme.Domain.AnswerVote" table="answer_vote" />
+    <union-subclass name="Askme.Domain.QuestionVote" table="question_vote" />
+  </class>
+  <!--class name="Askme.Domain.AnswerVote" table="answer_vote">
+    <id name="voteId" access="field" column="vote_id" type="int">
+      <generator class="increment" />
+    </id>
+    <many-to-one name="user" access="field" class="User" column="user_id" cascade="none"/>
     <property name="value" column="Value" type="int" access="field"/>
   </class>
+  <class name="Askme.Domain.QuestionVote" table="question_vote">
+    <id name="voteId" access="field" column="vote_id" type="int">
+      <generator class="increment" />
+    </id>
+    <many-to-one name="user" access="field" class="User" column="user_id" cascade="none"/>
+    <property name="value" column="Value" type="int" access="field"/>
+  </class-->
 </hibernate-mapping>
