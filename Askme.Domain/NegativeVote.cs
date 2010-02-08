@@ -2,10 +2,10 @@
 
 namespace Askme.Domain
 {
-    public class NegativeVote : Vote
+    /*public class NegativeVote : AnswerVote
     {
         public NegativeVote(User user) : base(user, -1){
             
         }
-    }
+    }*/
 }

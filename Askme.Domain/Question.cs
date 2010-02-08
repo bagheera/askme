@@ -107,7 +107,6 @@ namespace Askme.Domain
             }
         }
 
-
         public virtual void AcceptSolution(Answer answer)
         {
             lock (localLock)
@@ -121,13 +120,12 @@ namespace Askme.Domain
                     throw new NotSupportedException("An answer has been already accepted");
                 }
             }
-        }
-        public virtual bool	 IsOwner(User asker)
+        }         public virtual bool	 IsOwner(User asker)
         {
             return user.Equals(asker);
         }
 
-        public virtual void CastVote(Vote vote)
+        public virtual void CastVote(QuestionVote vote)
         {
             if(vote.User.Equals(user))
             {
