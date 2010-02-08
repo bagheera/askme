@@ -72,7 +72,7 @@ namespace Askme.Domain
             }
         }
 
-        public virtual void CastVote(Vote vote){
+        public virtual void CastVote(AnswerVote vote){
             votes.Add(vote);                  
         }
     }

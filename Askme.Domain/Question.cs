@@ -96,7 +96,7 @@ namespace Askme.Domain
             }
         }
 
-        public virtual void CastVote(Vote vote)
+        public virtual void CastVote(QuestionVote vote)
         {
             if(vote.User.Equals(user))
             {

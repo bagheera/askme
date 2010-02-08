@@ -15,11 +15,17 @@
         <one-to-many class="Answer" />
       </bag>
     </component>
-    
-    
+
     <bag name="tags" table="question_tag" cascade="all" access="field">
       <key column="QuestionId"/>
       <many-to-many column="TagId" class="Askme.Domain.Tag" />
     </bag>
+
+    <component name="votes" class ="Askme.Domain.Votes" access="field">
+      <bag name="votes" cascade="all-delete-orphan" access="field">
+        <key column="question_id"/>
+        <one-to-many class="Askme.Domain.QuestionVote" />
+      </bag>
+    </component>
   </class>
 </hibernate-mapping>

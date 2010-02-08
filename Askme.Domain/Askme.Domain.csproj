@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -91,6 +91,9 @@
     <Compile Include="Answers.cs" />
     <Compile Include="AnswersTest.cs" />
     <Compile Include="AnswerTest.cs" />
+    <Compile Include="AnswerVote.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AskMeDate.cs" />
     <Compile Include="AskMeDateTest.cs" />
     <Compile Include="IRepository.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Question.cs" />
     <Compile Include="QuestionTest.cs" />
     <Compile Include="NHibernateInMemoryBase.cs" />
+    <Compile Include="QuestionVote.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />

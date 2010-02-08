@@ -1,21 +1,20 @@
-﻿using System;
-
-namespace Askme.Domain
+﻿namespace Askme.Domain
 {
-    public class  Vote
+    public abstract class Vote
     {
-        private readonly User user;
-        private readonly int voteId;
-        protected readonly int value;
-        
-        protected Vote(User user, int value){
+        protected Vote()
+        {
+        }
+
+        protected Vote(User user, int value)
+        {
             this.user = user;
             this.value = value;
         }
-       
-        public Vote(){
-            
-        }
+
+        protected User user;
+        private readonly int voteId;
+        protected int value;
 
         public virtual int VoteId
         {
@@ -27,8 +26,9 @@ namespace Askme.Domain
             get { return user; }
         }
 
-        public virtual int Value{
-            get { return value;}
+        public virtual int Value
+        {
+            get { return value; }
         }
     }
 }

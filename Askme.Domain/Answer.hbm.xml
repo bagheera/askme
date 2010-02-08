@@ -11,8 +11,8 @@
     <property name="text" column="Text" type="string" access="field"/>
     <component name="votes" class ="Askme.Domain.Votes" access="field">
       <bag name="votes" cascade="all-delete-orphan" access="field">
-        <key column="answerId"/>
-        <one-to-many class="Askme.Domain.Vote" />
+        <key column="answer_id"/>
+        <one-to-many class="Askme.Domain.AnswerVote" />
       </bag>
     </component>
   </class>
