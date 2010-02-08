@@ -7,11 +7,20 @@ namespace Askme.Domain
     {
         private readonly IList<Vote> votes = new List<Vote>();
 
-
+        
         public int Count{
             get { return votes.Count; }
         }
         
+        public int GetTotalVotes()
+        {
+            int totalVotes = 0;
+            foreach (Vote vote in votes)
+            {
+                totalVotes += vote.Value;
+            }
+            return totalVotes;
+        }
 
         public void Add(Vote vote){
             if(HasUserVoted(vote.User))
