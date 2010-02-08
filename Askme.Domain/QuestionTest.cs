@@ -284,6 +284,17 @@ namespace Askme.Domain
             Assert.AreEqual(2, questionerAndAnswerer.Points());
         }
 
+        [Test]
+        public void QuestionerShouldGetTenPointsOnReceivingPositiveVote()
+        {
+            User questioner = new User("ShilpaG", "test123", "shilpa@foo.com");
+            User positiveVoteUser = new User("Ajith", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", questioner);
+
+            question.CastVote(QuestionVote.PositiveVote(positiveVoteUser));
+            Assert.AreEqual(10, questioner.Points());
+        }
 
       
     }
