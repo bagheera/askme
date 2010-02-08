@@ -9,7 +9,7 @@ namespace Askme.Domain
         private readonly string text;
         private int answerId;
         private Votes votes = new Votes();
-        
+
         private object localLock = new object();
 
         public virtual int AnswerId
@@ -62,8 +62,8 @@ namespace Askme.Domain
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Answer)) return false;
-            return Equals((Answer) obj);
+            if (obj.GetType() != typeof(Answer)) return false;
+            return Equals((Answer)obj);
         }
 
         public override int GetHashCode()
@@ -71,16 +71,23 @@ namespace Askme.Domain
             unchecked
             {
                 int result = (createdOn != null ? createdOn.GetHashCode() : 0);
-                result = (result*397) ^ (user != null ? user.GetHashCode() : 0);
-                result = (result*397) ^ (text != null ? text.GetHashCode() : 0);
-                result = (result*397) ^ answerId;
-                result = (result*397) ^ (localLock != null ? localLock.GetHashCode() : 0);
+                result = (result * 397) ^ (user != null ? user.GetHashCode() : 0);
+                result = (result * 397) ^ (text != null ? text.GetHashCode() : 0);
+                result = (result * 397) ^ answerId;
+                result = (result * 397) ^ (localLock != null ? localLock.GetHashCode() : 0);
                 return result;
             }
         }
 
-        public virtual void CastVote(Vote vote){
-            votes.Add(vote);                  
+        public virtual void CastVote(Vote vote)
+        {
+            votes.Add(vote);
+        }
+
+        public virtual void AddPoint(User user)
+        {
+            if (!User.Equals(user))
+                User.AddPoint(20);
         }
     }
 }

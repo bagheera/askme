@@ -113,16 +113,20 @@ namespace Askme.Domain
         public void VerifyThatAnAnswerCouldBeAccepted()
         {
             User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Repository repository = Repository.GetInstance();
+            repository.SaveUser(user);
             Question question = new Question("What is the use of 'var' key word?", user);
 
-            question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
+            Answer answer = new Answer(new AskMeDate(), user, "first answer");
+            repository.SaveAnswer(answer);
+            question.AddAnswer(answer);
 
-            Answer answerToBeAccepted = new Answer(new AskMeDate(), null, "second answer");
+            Answer answerToBeAccepted = new Answer(new AskMeDate(), user, "second answer");
+            repository.SaveAnswer(answerToBeAccepted);
             question.AddAnswer(answerToBeAccepted);
 
             question.AcceptSolution(answerToBeAccepted);
             
-            Repository repository = Repository.GetInstance();
             repository.SaveQuestion(question);
             Answers answersFound = repository.LoadAnswersForQuestion(question);
             
@@ -134,16 +138,20 @@ namespace Askme.Domain
         public void VerifyThatAnAnswerCouldNotBeAcceptedMoreThanOnce()
         {
             User user = new User("shanu", "shanu", "shanu@shanu.com");
+            Repository repository = Repository.GetInstance();
+            repository.SaveUser(user);
             Question question = new Question("What is the use of 'var' key word?", user);
 
-            question.AddAnswer(new Answer(new AskMeDate(), null, "first answer"));
+            Answer answer = new Answer(new AskMeDate(), user, "first answer");
+            repository.SaveAnswer(answer);
+            question.AddAnswer(answer);
 
-            Answer acceptedAnswer = new Answer(new AskMeDate(), null, "second answer");
+            Answer acceptedAnswer = new Answer(new AskMeDate(), user, "second answer");
+            repository.SaveAnswer(acceptedAnswer);
             question.AddAnswer(acceptedAnswer);
 
             question.AcceptSolution(acceptedAnswer);
-            
-            Repository repository = Repository.GetInstance();
+
             repository.SaveQuestion(question);
             Answers answersFound = repository.LoadAnswersForQuestion(question);
             
@@ -159,10 +167,10 @@ namespace Askme.Domain
         {
             User user = new User("shanu", "shanu", "shanu@shanu.com");
             Question question = new Question("What is the use of 'var' key word?", user);
-            Answer answer1 = new Answer(new AskMeDate(), null, "first answer");
+            Answer answer1 = new Answer(new AskMeDate(), user, "first answer");
             question.AddAnswer(answer1);
 
-            Answer answer2 = new Answer(new AskMeDate(), null, "second answer");
+            Answer answer2 = new Answer(new AskMeDate(), user, "second answer");
             question.AddAnswer(answer2);
 
             question.AcceptSolution(answer1);
@@ -208,6 +216,75 @@ namespace Askme.Domain
             Repository repository = Repository.GetInstance();
             repository.SaveQuestion(question);
         }
+
+        [Test]
+        public void QuestionOwnerShouldGetTwoPointsOnAcceptingAnAnswer()
+        {
+            User questioner = new User("ShilpaG", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", questioner);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            repository.SaveUser(questioner);
+
+
+
+            User answerer = new User("Ajith", "test123", "ajith@foo.com");
+            repository.SaveUser(answerer);
+
+            Answer answer1 = new Answer(new AskMeDate(), answerer, "first answer");
+            repository.SaveAnswer(answer1);
+
+            question.AddAnswer(answer1);
+
+            questioner.AcceptAnswer(question, answer1);
+            Assert.AreEqual(2, questioner.Points());
+        }
+
+        [Test]
+        public void AnswererShouldGetTwentyPointsIfQuestionOwnerAcceptsTheAnswer()
+        {
+            User questioner = new User("ShilpaG", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", questioner);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            repository.SaveUser(questioner);
+
+
+
+            User answerer = new User("Ajith", "test123", "ajith@foo.com");
+            repository.SaveUser(answerer);
+
+            Answer answer = new Answer(new AskMeDate(), answerer, "first answer");
+            repository.SaveAnswer(answer);
+
+            question.AddAnswer(answer);
+
+            questioner.AcceptAnswer(question, answer);
+            Assert.AreEqual(20, answerer.Points());
+        }
+        
+        [Test]
+        public void ShouldGetOnlyTwoPointsIfQuestionOwnerAcceptsHisOwnAnswer()
+        {
+            User questionerAndAnswerer = new User("ShilpaG", "test123", "shilpa@foo.com");
+
+            Question question = new Question("What is the use of 'var' key word?", questionerAndAnswerer);
+            Repository repository = Repository.GetInstance();
+            repository.SaveQuestion(question);
+            repository.SaveUser(questionerAndAnswerer);
+
+            Answer answer = new Answer(new AskMeDate(), questionerAndAnswerer, "first answer");
+            repository.SaveAnswer(answer);
+
+            question.AddAnswer(answer);
+
+            questionerAndAnswerer.AcceptAnswer(question, answer);
+            Assert.AreEqual(2, questionerAndAnswerer.Points());
+        }
+
+
       
     }
 }

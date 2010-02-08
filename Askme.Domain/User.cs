@@ -8,6 +8,7 @@ namespace Askme.Domain
         private string emailId;
         private string password;
         private int userId;
+        private Point Point = new Point();
 
         public User(string username, string password, string emailId)
         {
@@ -53,7 +54,7 @@ namespace Askme.Domain
                 {
                     repository.SaveUser(this);
                     userRegistered = true;
-                }catch(Exception e)
+                }catch(Exception)
                 {
                     userRegistered = false;
                 }
@@ -63,7 +64,6 @@ namespace Askme.Domain
 
         public virtual void AcceptAnswer(Question question,Answer answer)
         {
-            
             if (!question.IsOwner(this))
                 throw new NotSupportedException("An answer can be accepted only by the question's owner");
             question.AcceptSolution(answer);   
@@ -94,6 +94,15 @@ namespace Askme.Domain
                 result = (result*397) ^ userId;
                 return result;
             }
+        }
+        public virtual int Points()
+        {
+            return Point.Value;
+        }
+
+        public virtual void	 AddPoint(int i)
+        {
+            Point.AddPoint(i);
         }
     }
 }

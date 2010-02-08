@@ -115,12 +115,19 @@ namespace Askme.Domain
                 if (acceptedAnswer == null)
                 {
                     acceptedAnswer = answer;
+                    AssignPointForAcceptingAnswer();
                 }
                 else
                 {
                     throw new NotSupportedException("An answer has been already accepted");
                 }
             }
+        }
+
+        private void AssignPointForAcceptingAnswer()
+        {
+            user.AddPoint(2);
+            acceptedAnswer.AddPoint(user);
         }
         public virtual bool	 IsOwner(User asker)
         {

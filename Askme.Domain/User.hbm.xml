@@ -7,5 +7,8 @@
     <property name="Username" column="Username" type="String" length="120"/>
     <property name="EmailId" column="EmailId" type="String" length="120"/>
     <property name="Password" column="Password" type="String" length="120"/>
+    <component name="Point" class ="Askme.Domain.Point" access="field">
+      <property name="value" column="Point" type="int" access="field"/>
+    </component>
   </class>
 </hibernate-mapping>
