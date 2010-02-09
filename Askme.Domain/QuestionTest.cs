@@ -62,7 +62,11 @@ namespace Askme.Domain
             question.CastVote(QuestionVote.PositiveVote(user1));
             question.CastVote(QuestionVote.PositiveVote(user2));
             question.CastVote(QuestionVote.NegativeVote(user3));
-            Assert.AreEqual(1, question.GetVotes().GetTotalVotes());
+            Repository.GetInstance().SaveUser(user1);
+            Repository.GetInstance().SaveUser(user2);
+            Repository.GetInstance().SaveUser(user3);
+            Repository.GetInstance().SaveQuestion(question);
+            Assert.AreEqual(1, Repository.GetInstance().GetTotolVotes(question));//question.GetVotes().GetTotalVotes());
         }
 
         [Test]

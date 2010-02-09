@@ -139,6 +139,7 @@ namespace Askme.Domain
             {
                 throw new Exception	("Owner Cannot vote");
             }
+            vote.Question = this;
             votes.Add(vote);
         }
     }
