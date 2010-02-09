@@ -143,7 +143,6 @@ namespace Askme.Domain
                 votes.Add(vote);
                 vote.AddPoint(user);
             }
-
         }
     }
 }

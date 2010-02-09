@@ -12,6 +12,7 @@
     </joined-subclass>
     <joined-subclass name="Askme.Domain.QuestionVote" table="question_vote">
       <key column="vote_id"/>
+      <many-to-one name="_question" access="field" class="Question" column="question_id" cascade="none"/>
     </joined-subclass>
   </class>
 </hibernate-mapping>

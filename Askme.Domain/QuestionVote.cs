@@ -4,6 +4,15 @@ namespace Askme.Domain
 {
     public class QuestionVote:Vote
     {
+
+        private Question _question;
+
+        public virtual Question Question
+        {
+            get { return _question; }
+            set { _question = value; }
+        }
+
         protected QuestionVote(){}
         private QuestionVote(User user, int value) : base(user, value)
         {

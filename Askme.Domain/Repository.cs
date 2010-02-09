@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -84,6 +85,11 @@ namespace Askme.Domain
         public Answers LoadAnswersForQuestion(Question question)
         {
             return new Answers(session.CreateQuery("from Answer where questionId = " + question.QuestionId).List<Answer>());
+        }
+        public long GetTotolVotes(Question question)
+        {
+            Object count = session.CreateQuery("select sum(vote.value) from QuestionVote vote where vote._question = " + question.QuestionId).UniqueResult();
+            return (long)count;
         }
         private bool Save<T>(T t)
         {
